@@ -1,6 +1,6 @@
-# flockfollow1
+# flock-follow
 
-A new Flutter application.
+Create a flock of cars and share location
 
 ## Getting Started
 

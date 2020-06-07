@@ -1,4 +1,5 @@
 import 'package:flock_follow/home.dart';
+import 'package:flock_follow/map.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: MapPage(),
     );
   }
 }

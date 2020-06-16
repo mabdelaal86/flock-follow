@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flock_follow/settings.dart';
 import 'package:flock_follow/AddFlock.dart';
+import 'package:flock_follow/settings.dart';
+import 'package:flock_follow/appbar.dart';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
+
+
 
 void main() => runApp(MyApp());
 
@@ -17,6 +24,7 @@ class MyApp extends StatelessWidget {
       
         "/AddFlock": (BuildContext  context) => AddFlock(),
         "/settings": (IconButton ) => ButtonSettings(),
+        "/appbar": (BuildContext ) => AppBarMapMembersMessages(),
 
       },
     );
@@ -35,18 +43,22 @@ class MyStatelessWidget extends StatelessWidget {
         actions: [
           IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),
 
+          
+          IconButton(icon:Icon(Icons.account_balance), onPressed: () {Navigator.of(context).pushNamed('/appbar');}),
+
           //refresh Home Page
-          IconButton(icon:Icon(Icons.refresh), onPressed: null)
+          IconButton(icon:Icon(Icons.refresh), onPressed:null )
         ],
       ),
-      body: Center(),
+        
+      
       
         floatingActionButton: FloatingActionButton(
         onPressed: () {Navigator.of(context).pushNamed('/AddFlock');},
         tooltip: "new flock",
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
-        
+
       ),
     );
   }

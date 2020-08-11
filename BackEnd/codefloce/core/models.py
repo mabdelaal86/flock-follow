@@ -10,10 +10,10 @@ class Messages(models.Model):
 #   flock_id = models.ForeignKey(Flcks ,on_delete=models.CASCADE)
 
 #class Flock_user(models.Model):
-#    float_id = models.ForeignKey(Flcks ,on_delete=models.CASCADE)
+#    user_id = models.ForeignKey(User ,on_delete=models.CASCADE)
 #    flock_id = models.primaryKey(Flcks ,on_delete=models.CASCADE)
 
-class Flcks(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=25)
     description = models.CharField(max_length=101)
 #    status =  models.()

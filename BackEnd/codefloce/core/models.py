@@ -9,11 +9,11 @@ class Messages(models.Model):
 #    user_id = models.ForeignKey(User ,on_delete=models.CASCADE)
 #   flock_id = models.ForeignKey(Flcks ,on_delete=models.CASCADE)
 
-#class Flock_user(models.Model):
+#class Flock_User(models.Model):
 #    user_id = models.ForeignKey(User ,on_delete=models.CASCADE)
 #    flock_id = models.primaryKey(Flcks ,on_delete=models.CASCADE)
 
-class Post(models.Model):
+class Flcks(models.Model):
     title = models.CharField(max_length=25)
     description = models.CharField(max_length=101)
 #    status =  models.()
@@ -33,5 +33,4 @@ class User(models.Model):
     longitude = models.CharField(max_length=150)
 
 
-    def __str__(self):
-        return self.title
+   

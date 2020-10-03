@@ -6,9 +6,6 @@ import 'package:flock_follow/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-
-
-
 void main() => runApp(MyApp());
 
 /// This Widget is the main application widget.
@@ -50,15 +47,12 @@ class MyStatelessWidget extends StatelessWidget {
           IconButton(icon:Icon(Icons.refresh), onPressed:null )
         ],
       ),
-        
-      
-      
+              
         floatingActionButton: FloatingActionButton(
         onPressed: () {Navigator.of(context).pushNamed('/AddFlock');},
         tooltip: "new flock",
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
-
       ),
     );
   }

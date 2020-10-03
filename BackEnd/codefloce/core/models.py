@@ -20,8 +20,6 @@ class Flcks(models.Model):
     longitude = models.CharField(max_length=150)
     leader_id = models.OneToOneField(User ,on_delete=models.CASCADE)
 
-
-
 class Messages(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     contect = models.CharField(max_length=50)
@@ -31,8 +29,3 @@ class Messages(models.Model):
 class Flock_User(models.Model):
    user_id = models.ForeignKey(User ,on_delete=models.CASCADE)
    flock_id = models.ForeignKey(Flcks ,on_delete=models.CASCADE)
-
-
-
-
-   

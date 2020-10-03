@@ -14,9 +14,7 @@ class addflock extends State {
         appBar: AppBar(
           title: Text('Add Flock'),
           actions: [
-
             //SAVE Button
-
           ],
 
         ),
@@ -44,7 +42,6 @@ class addflock extends State {
                   icon: Icon(null),
                   hintText: 'Password'),
               ),
-
             ],
           ),
         )

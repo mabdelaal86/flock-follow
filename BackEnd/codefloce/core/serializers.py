@@ -12,7 +12,6 @@ class MessagesSerializer(serializers.ModelSerializer):
             'flock_id',
         ) 
 
-
 # class Flock_idSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Flock_id

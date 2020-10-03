@@ -41,9 +41,7 @@ class addflock extends State {
                   icon: Icon(null),
                   hintText: 'Phone'),
               ),
-
-              //Profile Photo 
-              
+              //Profile Photo               
             ],
           ),
         )

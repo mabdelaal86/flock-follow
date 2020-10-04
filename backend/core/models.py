@@ -39,7 +39,6 @@ class Flock(models.Model):
 
 
 class Message(models.Model):
-    date_time = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
 

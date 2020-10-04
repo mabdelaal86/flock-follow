@@ -24,10 +24,9 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('admin/', admin.site.urls),
 
-    #urls
+    # urls
     path('messages/', Messages),
     path('flock_user/', Flock_User),
     path('flcks/', Flcks),
     path('user/', User),
-
 ]

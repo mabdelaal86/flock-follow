@@ -1,9 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Messages, User  , Flcks ,Flock_User
+from .models import Message, User, Flock
 
-admin.site.register(Messages)
+admin.site.register(Message)
 admin.site.register(User)
-admin.site.register(Flcks)
-admin.site.register(Flock_User)
+admin.site.register(Flock)

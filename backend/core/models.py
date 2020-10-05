@@ -19,6 +19,12 @@ class User(models.Model):
     def __str__(self):
         return f'[{self.id}]: {self.name[:20]}'
 
+    def joining_flock(self) -> 'Flock':
+        return self.joined_flocks.filter(status='S').first()
+
+    def managing_flock(self) -> 'Flock':
+        return self.created_flocks.filter(status='S').first()
+
 
 class Flock(models.Model):
     FLOCK_STATUSES = (

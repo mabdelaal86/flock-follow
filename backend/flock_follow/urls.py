@@ -24,6 +24,11 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),
 
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('api/v1/users/', views.UserList.as_view()),
+    path('api/v1/users/<int:pk>/', views.UserDetail.as_view()),
+    path('api/v1/flocks/', views.FlockList.as_view()),
+    path('api/v1/flocks/<int:pk>/', views.FlockDetail.as_view()),
+    path('api/v1/flocks/<int:pk>/members/', views.MemberList.as_view()),
+    path('api/v1/flocks/<int:pk>/members/<int:member_id>/', views.MemberDetail.as_view()),
+    path('api/v1/flocks/<int:pk>/messages/', views.MessageList.as_view()),
 ]

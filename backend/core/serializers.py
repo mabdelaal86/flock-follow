@@ -12,12 +12,14 @@ class FlockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flock
         fields = (
-            'id', 'title', 'description', 'status', 'password', 'destination', 'latitude', 'longitude',
-            'created_at', 'started', 'finished',
+            'id', 'title', 'description', 'status', 'password',
+            'destination', 'latitude', 'longitude',
+            'created_at', 'started_at', 'finished_at',
+            'leader',
         )
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ('content', 'created_at')
+        fields = ('content', 'created_at', 'user')

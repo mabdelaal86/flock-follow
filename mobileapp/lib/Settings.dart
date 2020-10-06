@@ -12,7 +12,7 @@ class addflock extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('settings'),
+          title: Text('Settings'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: null,
@@ -41,9 +41,7 @@ class addflock extends State {
                   icon: Icon(null),
                   hintText: 'Phone'),
               ),
-
-              //Profile Photo 
-              
+              //Profile Photo               
             ],
           ),
         )

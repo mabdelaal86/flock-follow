@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flock_follow/AddFlock.dart';
-import 'package:flock_follow/settings.dart';
+import 'package:flock_follow/Settings.dart';
 import 'package:flock_follow/appbar.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-
-
-
 
 void main() => runApp(MyApp());
 
@@ -39,7 +36,7 @@ class MyStatelessWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flocf to Follow'),
+        title: const Text('Flock to Follow'),
         actions: [
           IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),
 
@@ -50,15 +47,12 @@ class MyStatelessWidget extends StatelessWidget {
           IconButton(icon:Icon(Icons.refresh), onPressed:null )
         ],
       ),
-        
-      
-      
+              
         floatingActionButton: FloatingActionButton(
         onPressed: () {Navigator.of(context).pushNamed('/AddFlock');},
         tooltip: "new flock",
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
-
       ),
     );
   }

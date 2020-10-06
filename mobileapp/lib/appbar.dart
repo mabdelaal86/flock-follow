@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
-
 class AppBarMapMembersMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,10 @@ class AppBarMapMembersMessages extends StatelessWidget {
                 Tab(text: 'Messages' ,icon: Icon(Icons.message)),
               ],
             ),
-            title: Text('ver home new flock name'),
+            title: Text('To infinity.. and beyomd!'),
+            actions: [
+              IconButton(icon:Icon(Icons.refresh), onPressed:null )
+            ],
           ),
           body: TabBarView(
             children: [ 
@@ -34,9 +35,6 @@ class AppBarMapMembersMessages extends StatelessWidget {
     );
   }
 }
-
-
-
 
 //Map
 
@@ -52,10 +50,7 @@ class Map1 extends State{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Maps'),
-      ),
-      body: Center(
+      body:Center(
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -69,12 +64,6 @@ class Map1 extends State{
     );
   }
 }
-
-
-
-
-
-
 
 //Messages
 
@@ -134,7 +123,6 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
       ]),
     );
   }
-
 
   Widget _buildComposer() {
     return IconTheme(
@@ -207,7 +195,6 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     }
     super.dispose();
   }
-
 }
 
 class Msg extends StatelessWidget {

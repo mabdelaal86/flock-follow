@@ -12,11 +12,9 @@ class addflock extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add Flock'),
+          title: Text('New Flock'),
           actions: [
-
             //SAVE Button
-
           ],
 
         ),
@@ -44,7 +42,6 @@ class addflock extends State {
                   icon: Icon(null),
                   hintText: 'Password'),
               ),
-
             ],
           ),
         )

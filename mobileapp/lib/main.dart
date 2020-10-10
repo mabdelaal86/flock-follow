@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flock_follow/AddFlock.dart';
+import 'package:flock_follow/New_Flock.dart';
 import 'package:flock_follow/Settings.dart';
 import 'package:flock_follow/appbar.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+
 
 void main() => runApp(MyApp());
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       home: MyStatelessWidget(),
       routes: <String , WidgetBuilder>{
       
-        "/AddFlock": (BuildContext  context) => AddFlock(),
+        "/New_Flock": (BuildContext  context) => AddFlock(),
         "/settings": (IconButton ) => ButtonSettings(),
         "/appbar": (BuildContext ) => AppBarMapMembersMessages(),
 
@@ -35,8 +37,10 @@ class MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(       
         title: const Text('Flock to Follow'),
+        backgroundColor: Colors.lightGreen,
+
         actions: [
           IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),
 
@@ -49,7 +53,7 @@ class MyStatelessWidget extends StatelessWidget {
       ),
               
         floatingActionButton: FloatingActionButton(
-        onPressed: () {Navigator.of(context).pushNamed('/AddFlock');},
+        onPressed: () {Navigator.of(context).pushNamed('/New_Flock');},
         tooltip: "new flock",
         child: Icon(Icons.add),
         backgroundColor: Colors.green,

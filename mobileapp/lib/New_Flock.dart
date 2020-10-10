@@ -12,9 +12,10 @@ class addflock extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
           title: Text('New Flock'),
           actions: [
-            //SAVE Button
+            IconButton(icon:Icon(Icons.save), onPressed:null ),
           ],
 
         ),
@@ -32,7 +33,7 @@ class addflock extends State {
               TextField(
                 controller: null,
                 decoration: InputDecoration(
-                  icon: Icon(Icons.local_play),
+                  icon: Icon(Icons.map),
                   hintText: 'Destination'),
               ),
 

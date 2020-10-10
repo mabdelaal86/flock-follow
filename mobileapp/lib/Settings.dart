@@ -12,6 +12,7 @@ class addflock extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
           title: Text('Settings'),
         ),
         floatingActionButton: FloatingActionButton(

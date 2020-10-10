@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+
 
 class AppBarMapMembersMessages extends StatelessWidget {
   @override
@@ -11,6 +13,11 @@ class AppBarMapMembersMessages extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.lightGreen,
+            actions: [
+              IconButton(icon:Icon(Icons.refresh), onPressed:null ),
+              IconButton(icon:Icon(Icons.vertical_align_bottom), onPressed:null )
+            ],
             bottom: TabBar(
               tabs: [
                 Tab(text: 'Members', icon: Icon(Icons.people)),
@@ -18,14 +25,11 @@ class AppBarMapMembersMessages extends StatelessWidget {
                 Tab(text: 'Messages' ,icon: Icon(Icons.message)),
               ],
             ),
-            title: Text('To infinity.. and beyomd!'),
-            actions: [
-              IconButton(icon:Icon(Icons.refresh), onPressed:null )
-            ],
+            title: Text('ver home new flock name'),
           ),
           body: TabBarView(
             children: [ 
-              Icon(Icons.map),
+              Members(),
               Map(),
               Messages(),
             ],
@@ -35,6 +39,61 @@ class AppBarMapMembersMessages extends StatelessWidget {
     );
   }
 }
+
+//Members
+
+class Members extends StatelessWidget {
+  static final showCard = true; 
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(       
+        body: _buildCard() 
+      ),
+    );
+  }
+
+  Widget _buildCard() => SizedBox(
+      
+      child: Card(
+        child: Column(
+          children: [            
+            ListTile(
+              title: Text('Mohamed Abdel-Aal'),
+              leading: Icon(
+                Icons.people,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+  Widget _buildStack() => Stack(
+      alignment: const Alignment(0.6, 0.6),
+      children: [
+       
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.black45,
+          ),
+          child: Text(
+            'Mia B',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+
+}
+  
+
+
 
 //Map
 
@@ -60,6 +119,13 @@ class Map1 extends State{
               zoom: 12.0),
           ),
         ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {Navigator.of(context).pushNamed('/ ');},
+        tooltip: "",
+        child: Icon(Icons.place_rounded),
+        backgroundColor: Colors.green,
       ),
     );
   }

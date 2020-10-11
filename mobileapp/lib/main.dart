@@ -42,15 +42,26 @@ class MyStatelessWidget extends StatelessWidget {
         backgroundColor: Colors.lightGreen,
 
         actions: [
-          IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),
-
-          
+          IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),   
           IconButton(icon:Icon(Icons.account_balance), onPressed: () {Navigator.of(context).pushNamed('/appbar');}),
-
           //refresh Home Page
-          IconButton(icon:Icon(Icons.refresh), onPressed:null )
+          IconButton(icon:Icon(Icons.refresh), onPressed:null ),
+          IconButton(icon:Icon(Icons.menu), onPressed:null ),  
         ],
       ),
+      body: Row(
+  children: <Widget>[  
+      
+    Expanded(
+      child: Text('Deliver features faster', textAlign: TextAlign.center),   
+    ),    
+    Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain, 
+      ),
+    ),
+  ],
+),
               
         floatingActionButton: FloatingActionButton(
         onPressed: () {Navigator.of(context).pushNamed('/New_Flock');},

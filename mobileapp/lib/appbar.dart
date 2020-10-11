@@ -43,58 +43,27 @@ class AppBarMapMembersMessages extends StatelessWidget {
 //Members
 
 class Members extends StatelessWidget {
-  static final showCard = true; 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(       
-        body: _buildCard() 
-      ),
-    );
+    return _buildCard();
   }
 
-  Widget _buildCard() => SizedBox(
-      
+  Widget _buildCard() => SizedBox(   
       child: Card(
         child: Column(
           children: [            
             ListTile(
               title: Text('Mohamed Abdel-Aal'),
               leading: Icon(
-                Icons.people,
+                Icons.account_circle,
               ),
             ),
           ],
         ),
       ),
     );
-
-  Widget _buildStack() => Stack(
-      alignment: const Alignment(0.6, 0.6),
-      children: [
-       
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black45,
-          ),
-          child: Text(
-            'Mia B',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
-    );
-
 }
   
-
-
-
 //Map
 
 class Map extends StatefulWidget {

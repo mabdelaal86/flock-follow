@@ -15,7 +15,7 @@ class addflock extends State {
           backgroundColor: Colors.lightGreen,
           title: Text('New Flock'),
           actions: [
-            IconButton(icon:Icon(Icons.save), onPressed:null ),
+            IconButton(icon:Icon(Icons.save), onPressed:() {Navigator.of(context).pushNamed('/Join_flock');} ),
           ],
 
         ),

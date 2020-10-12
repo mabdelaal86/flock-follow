@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flock_follow/Join_flock.dart';
 import 'package:flock_follow/New_Flock.dart';
 import 'package:flock_follow/Settings.dart';
 import 'package:flock_follow/appbar.dart';
@@ -6,6 +7,8 @@ import 'package:flock_follow/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'dart:async';
+
 
 
 void main() => runApp(MyApp());
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/New_Flock": (BuildContext  context) => AddFlock(),
         "/settings": (IconButton ) => ButtonSettings(),
         "/appbar": (BuildContext ) => AppBarMapMembersMessages(),
+        "/Join_flock": (BuildContext ) =>  JoinFlock(),
 
       },
     );
@@ -43,21 +47,22 @@ class MyStatelessWidget extends StatelessWidget {
 
         actions: [
           IconButton(icon:Icon(Icons.settings), onPressed: () {Navigator.of(context).pushNamed('/settings');}),   
-          IconButton(icon:Icon(Icons.account_balance), onPressed: () {Navigator.of(context).pushNamed('/appbar');}),
           //refresh Home Page
-          IconButton(icon:Icon(Icons.refresh), onPressed:null ),
+          IconButton(icon:Icon(Icons.refresh), onPressed:() {Navigator.of(context).pushNamed('/main');} ),
           IconButton(icon:Icon(Icons.menu), onPressed:null ),  
         ],
       ),
       body: Row(
-  children: <Widget>[  
-      
+  children: <Widget>[
     Expanded(
-      child: Text('Deliver features faster', textAlign: TextAlign.center),   
-    ),    
+      child: Text('name flock', textAlign: TextAlign.center),
+      
+    ),
+    
     Expanded(
       child: FittedBox(
-        fit: BoxFit.contain, 
+        fit: BoxFit.contain, // otherwise the logo will be tiny
+        child: const FlutterLogo(),
       ),
     ),
   ],

@@ -15,12 +15,12 @@ class AppBarMapMembersMessages extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.lightGreen,
             actions: [
-              IconButton(icon:Icon(Icons.refresh), onPressed:null ),
+              IconButton(icon:Icon(Icons.refresh), onPressed:() {Navigator.of(context).pushNamed('/appbar');} ),
               IconButton(icon:Icon(Icons.vertical_align_bottom), onPressed:null )
             ],
             bottom: TabBar(
               tabs: [
-                Tab(text: 'Members', icon: Icon(Icons.people)),
+                Tab(text: 'Members',  icon: Icon(Icons.people)),
                 Tab(text: 'Map', icon: Icon(Icons.map)),
                 Tab(text: 'Messages' ,icon: Icon(Icons.message)),
               ],
@@ -45,7 +45,7 @@ class AppBarMapMembersMessages extends StatelessWidget {
 class Members extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return _buildCard();
+    return  _buildCard();
   }
 
   Widget _buildCard() => SizedBox(   

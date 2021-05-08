@@ -11,7 +11,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPage extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String _userName;
-  String _userAbout;
   String _userPhone;
 
   @override
@@ -37,10 +36,6 @@ class _RegisterPage extends State<RegisterPage> {
             decoration: const InputDecoration(labelText: 'Name'),
             validator: validateName,
             onSaved: (newValue) => _userName = newValue,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'About'),
-            onSaved: (newValue) => _userAbout = newValue,
           ),
           TextFormField(
             decoration: const InputDecoration(labelText: 'Phone'),
@@ -72,7 +67,7 @@ class _RegisterPage extends State<RegisterPage> {
   saveData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      final User user = await createUser(_userName, _userAbout, _userPhone);
+      final User user = await createUser(_userName, _userPhone);
       await setUserLocalId(user.id);
       Phoenix.rebirth(context);
     }

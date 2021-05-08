@@ -49,8 +49,8 @@ User parseUser(String responseText) {
   return User.fromJson(responseJson);
 }
 
-Future<User> createUser(String name, String about, String phone) async {
-  final String json = '{"name": "$name", "about": "$about", "phone": "$phone"}';
+Future<User> createUser(String name, String phone) async {
+  final String json = '{"name": "$name", "phone": "$phone"}';
   final String res = await httpPost('/users/', json);
   return parseUser(res);
 }

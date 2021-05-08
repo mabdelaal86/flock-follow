@@ -25,7 +25,12 @@ SECRET_KEY = '#2a1bt)xhni9etp$-nx#x9@-=t+$2v#5el7%9zxc4==3$g*-wq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'localhost', '127.0.0.1',  # localhost
+    '10.0.2.2',  # emulator
+    '192.168.0.1',
+]
 
 
 # Application definition
@@ -37,11 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    #Library import
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    "rest_framework_api_key",
 
     'core',
 ]

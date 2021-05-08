@@ -2,3 +2,4 @@ Django~=3.1.2
 django-extensions~=3.0.9
 djangorestframework~=3.12.1
 django-rest-auth~=0.9.5
+djangorestframework-api-key==2.*

@@ -17,7 +17,7 @@ class _SettingsPage extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('Settings'),
+        title: Text('New Flock'),
       ),
       body: Container(
         padding: EdgeInsets.all(20),

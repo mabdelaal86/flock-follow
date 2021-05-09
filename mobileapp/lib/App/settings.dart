@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
-  _SettingsPage createState() { return _SettingsPage(); }
+  _SettingsPage createState() {
+    return _SettingsPage();
+  }
 }
 
 class _SettingsPage extends State<SettingsPage> {
@@ -24,8 +26,7 @@ class _SettingsPage extends State<SettingsPage> {
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return buildMessage(snapshot.error.toString());
-            if (!snapshot.hasData)
-              return buildMessage("Loading...");
+            if (!snapshot.hasData) return buildMessage("Loading...");
             return buildForm();
           },
         ),
@@ -33,7 +34,8 @@ class _SettingsPage extends State<SettingsPage> {
     );
   }
 
-  Widget buildMessage(String message) => Scaffold(body: Center(child: Text(message)));
+  Widget buildMessage(String message) =>
+      Scaffold(body: Center(child: Text(message)));
 
   Widget buildForm() {
     return Form(
@@ -68,14 +70,12 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   String validateName(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Name is required!";
+    if (value == null || value.trim().isEmpty) return "Name is required!";
     return null;
   }
 
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Phone is required!";
+    if (value == null || value.trim().isEmpty) return "Phone is required!";
     return null;
   }
 

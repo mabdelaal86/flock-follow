@@ -14,7 +14,6 @@ import 'package:flock_follow/App/settings.dart';
 // import 'package:flock_follow/JsonAPIs/JsonModel.dart';
 import 'package:flock_follow/data/user.dart';
 
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,16 +26,34 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () { Navigator.of(context).pushNamed('/main'); },
+            onPressed: () {
+              Navigator.of(context).pushNamed('/main');
+            },
           ),
           PopupMenuButton<String>(
-            onSelected: (route) { Navigator.of(context).pushNamed(route); },
+            onSelected: (route) {
+              Navigator.of(context).pushNamed(route);
+            },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(value: "/settings", child: Text('Settings')),
+              const PopupMenuItem<String>(
+                  value: "/settings", child: Text('Settings')),
             ],
           ),
         ],
       ),
+      body: ListView(
+        children: <Widget>[
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/New_Flock');
+            },
+            tooltip: "create new flock",
+            child: Icon(Icons.add),
+            backgroundColor: Colors.green,
+          )
+        ],
+      ),
+
       // body: ListView(children: <Widget>[
       //   Card(
       //       child: Container(

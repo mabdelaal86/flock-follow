@@ -5,7 +5,9 @@ import 'package:flock_follow/data/user.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
-  _RegisterPage createState() { return _RegisterPage(); }
+  _RegisterPage createState() {
+    return _RegisterPage();
+  }
 }
 
 class _RegisterPage extends State<RegisterPage> {
@@ -53,14 +55,12 @@ class _RegisterPage extends State<RegisterPage> {
   }
 
   String validateName(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Name is required!";
+    if (value == null || value.trim().isEmpty) return "Name is required!";
     return null;
   }
 
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Phone is required!";
+    if (value == null || value.trim().isEmpty) return "Phone is required!";
     return null;
   }
 

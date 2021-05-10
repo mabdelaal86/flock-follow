@@ -52,15 +52,22 @@ Flocks parseFlocks(String responseText) {
 }
 
 Future<Flocks> createFlocks(
-    String title, String description, String password) async {
+  String title,
+  String description,
+  String password,
+  String destination,
+  double latitude,
+  double longitude,
+  int leader_id,
+) async {
   final String json =
-      '{"title": "$title", "description": "$description","description": "$password"}';
+      '{"title": "$title", "description": "$description","password": "$password"}, "destination": "$destination"}, "latitude": "$latitude"},"longitude": "$longitude"},"leader_id": "$leader_id"}';
   final String res = await httpPost('/flocks/', json);
   return parseFlocks(res);
 }
 
 Future updateFlocks(Flocks flock) async {
   final String json =
-      '{"id": ${flock.id}, "title": "${flock.title}", "description": "${flock.description}", "password": "${flock.password}"}';
+      '{"id": ${flock.id}, "title": "${flock.title}", "description": "${flock.description}", "password": "${flock.password}", "destination": "${flock.destination}", "latitude": "${flock.latitude}", "longitude": "${flock.longitude}", "leader_id": "${flock.leader_id}"}';
   await httpPut('/flocks/${flock.id}/', json);
 }

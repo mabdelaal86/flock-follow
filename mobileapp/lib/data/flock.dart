@@ -29,6 +29,15 @@ class Flock {
         startedAt = DateTime.tryParse(json["started_at"] ?? ""),
         finishedAt = DateTime.tryParse(json["finished_at"] ?? ""),
         leaderId = json['leader'] as int;
+
+  String get flockStatus {
+    switch (status) {
+      case 'C': return "Created";
+      case 'S': return "Started";
+      case 'F': return "Finished";
+      default: return "Unknown";
+    }
+  }
 }
 
 Future<Flock> readFlock(id) async {

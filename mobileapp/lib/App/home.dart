@@ -45,56 +45,18 @@ class _HomePage extends State<HomePage> {
         ],
       ),
       body: ListView(
-        children: _flocks.map((flock) => Text(flock.title)).toList(),
+        children: _flocks.map((flock) => Card(
+          child: ListTile(
+            title: Text(flock.title),
+            subtitle: Text(flock.flockStatus),
+            trailing: Image(
+              image: NetworkImage("https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78"),
+              width: 100,
+              height: 100,
+            ),
+          ),
+        )).toList(),
       ),
-      // body: ListView(children: <Widget>[
-      //   Card(
-      //       child: Container(
-      //     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 18.0),
-      //     child: Row(
-      //       children: <Widget>[
-      //         Container(
-      //             child: Column(
-      //                 crossAxisAlignment: CrossAxisAlignment.end,
-      //                 children: <Widget>[
-      //                   Row(
-      //                     children: <Widget>[
-      //                       Text(
-      //                         'go the sea',
-      //                         style: TextStyle(
-      //                             fontSize: 14.0,
-      //                             fontFamily: 'Roboto',
-      //                             color: Color(0xFF212121)),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   Row(
-      //                     children: <Widget>[
-      //                       Text(
-      //                         'standby',
-      //                         style: TextStyle(
-      //                             fontSize: 14.0,
-      //                             fontFamily: 'Roboto',
-      //                             color: Color(0xFF9E9E9E)),
-      //                       ),
-      //                     ],
-      //                   ),
-      //               ]
-      //             )
-      //         ),
-      //         Container(
-      //             padding: EdgeInsets.only(right: 13.0),
-      //             child: Image(
-      //               image: NetworkImage(
-      //                   'https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78'),
-      //               width: 120,
-      //               height: 120,
-      //             ),
-      //         ),
-      //       ],
-      //     ),
-      //   )),
-      // ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/New_Flock');

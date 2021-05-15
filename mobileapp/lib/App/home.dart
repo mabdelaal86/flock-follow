@@ -1,3 +1,4 @@
+import 'package:flock_follow/data/flock.dart';
 import 'package:flock_follow/data/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  List<Flock> _flocks = <Flock>[];
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +43,9 @@ class _HomePage extends State<HomePage> {
             ],
           ),
         ],
+      ),
+      body: ListView(
+        children: _flocks.map((flock) => Text(flock.title)).toList(),
       ),
       // body: ListView(children: <Widget>[
       //   Card(
@@ -103,14 +109,17 @@ class _HomePage extends State<HomePage> {
   loadFlocks(BuildContext context) async {
     try {
       final l = await determinePosition();
-      print(l);
+      print("* Location: {$l}");
+      final flocks = await findFlocks(l.latitude, l.longitude);
+      print("* Flocks: ${flocks.length}");
+      setState(() => _flocks = flocks);
     }
     catch (ex) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: Text("Can't access location"),
-          content: Text(ex),
+          content: Text(ex.toString()),
         ),
       );
     }

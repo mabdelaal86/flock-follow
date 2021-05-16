@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
 class MainPage extends StatefulWidget {
   @override
-  _MainPage createState() { return _MainPage(); }
+  _MainPage createState() => _MainPage();
 }
 
 class _MainPage extends State<MainPage> {

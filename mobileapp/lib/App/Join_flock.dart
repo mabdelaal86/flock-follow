@@ -37,11 +37,10 @@ class _JoinFlock extends State<JoinFlock> {
           Row( 
             children: [
 
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pushNamed('/home'),
-                child: const Text('Cancel'),
+              Center(
+                child: TextButton(
+                  onPressed: () => Navigator.of(context).pushNamed('/home'),
+                  child: const Text('Cancel'),
                 ),
               ),
 
@@ -54,7 +53,7 @@ class _JoinFlock extends State<JoinFlock> {
                       .showSnackBar(SnackBar(content: Text('Join a Flock')));
                     }
                   },
-                  
+
                 child: const Text('JOIN'),
                 ),
               ),

@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flock_follow/App/home.dart';
 import 'package:flock_follow/App/appbar.dart';
 
+
 class JoinFlock extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _JoinFlock(); //erre name
+  _JoinFlock createState() {
+    return _JoinFlock();
   }
 }
 
-class _JoinFlock extends State {
+class _JoinFlock extends State<JoinFlock> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Form(
+      key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          
           Text('Join a Flock'),
           Text('To join/view this flock you povide a password.'),
           Text('Please contact the flock leader for the passwrd.'),
@@ -29,28 +34,34 @@ class _JoinFlock extends State {
               return null;
             },
           ),
-          Row(
+          Row( 
             children: [
-              Center(
-                child: TextButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/home'),
-                  child: const Text('Cancel'),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                onPressed: () => Navigator.of(context).pushNamed('/home'),
+                child: const Text('Cancel'),
                 ),
               ),
-              Center(
-                child: TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue),
-                  ),
-                  onPressed: () => Navigator.of(context).pushNamed('/appbar'),
-                  child: const Text('JOIN'),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Join a Flock')));
+                    }
+                  },
+                  
+                child: const Text('JOIN'),
                 ),
               ),
             ],
-          )
+          )        
         ],
       ),
-    ));
+    );
   }
 }

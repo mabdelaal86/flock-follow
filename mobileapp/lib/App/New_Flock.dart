@@ -9,7 +9,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPage extends State<SettingsPage> {
-  Flocks flock;
+  Flock flock;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,7 +22,7 @@ class _SettingsPage extends State<SettingsPage> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: FutureBuilder(
-          future: loadData(),
+          // future: loadData(),
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return buildMessage(snapshot.error.toString());
@@ -85,14 +85,14 @@ class _SettingsPage extends State<SettingsPage> {
     return null;
   }
 
-  Future<Flocks> loadData() async {
-    final userId = await getFlocksLocalId();
-
-    flock = await readFlocks(userId);
-    print("title: " + flock.title);
-
-    return flock;
-  }
+  // Future<Flock> loadData() async {
+  //   final userId = await getFlockLocalId();
+  //
+  //   flock = await readFlock(userId);
+  //   print("title: " + flock.title);
+  //
+  //   return flock;
+  // }
 
   saveData() async {
     if (_formKey.currentState.validate()) {

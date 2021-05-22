@@ -1,6 +1,7 @@
-import 'package:flock_follow/App/utilities.dart';
-import 'package:flock_follow/data/user.dart';
 import 'package:flutter/material.dart';
+
+import 'utilities.dart';
+import 'package:flock_follow/data/user.dart';
 
 class SettingsPage extends StatefulWidget {
   @override

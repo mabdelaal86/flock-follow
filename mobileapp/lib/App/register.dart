@@ -1,8 +1,8 @@
-import 'package:flock_follow/App/utilities.dart';
-import 'package:flock_follow/data/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
+import 'utilities.dart';
+import 'package:flock_follow/data/user_location.dart';
 import 'package:flock_follow/data/user.dart';
 
 class RegisterPage extends StatefulWidget {

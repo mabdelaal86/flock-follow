@@ -1,7 +1,7 @@
-import 'package:flock_follow/App/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'utilities.dart';
 import 'package:flock_follow/data/flock.dart';
 import 'package:flock_follow/data/user_location.dart';
 

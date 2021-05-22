@@ -1,65 +1,82 @@
 import 'dart:convert';
 
 import 'package:flock_follow/data/backend.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class Flocks {
+class Flock {
   int id;
   String title;
   String description;
+  String status;
   String password;
   String destination;
   double latitude;
   double longitude;
-  int leader_id;
+  DateTime createdAt;
+  DateTime startedAt;
+  DateTime finishedAt;
+  int leaderId;
 
-  Flocks.fromJson(Map<String, dynamic> json)
+  Flock.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
         title = json['title'] as String,
         description = json['description'] as String,
+        status = json['status'] as String,
         password = json['password'] as String,
         destination = json['destination'] as String,
-        latitude = json['latitude'] as double,
-        longitude = json['longitude'] as double,
-        leader_id = json['leader_id'] as int;
+        latitude = double.tryParse(json['latitude'] ?? ""),
+        longitude = double.tryParse(json['longitude'] ?? ""),
+        createdAt = DateTime.tryParse(json["created_at"]),
+        startedAt = DateTime.tryParse(json["started_at"] ?? ""),
+        finishedAt = DateTime.tryParse(json["finished_at"] ?? ""),
+        leaderId = json['leader'] as int;
+
+  String get flockStatus {
+    switch (status) {
+      case 'C': return "Created";
+      case 'S': return "Started";
+      case 'F': return "Finished";
+      default: return "Unknown";
+    }
+  }
 }
 
-Future<int> getFlocksLocalId() async {
-  final prefs = await SharedPreferences.getInstance();
-  final value = prefs.getInt('flock_id') ?? 0;
-  print('read: $value');
-  return value;
-}
-
-Future setFlocksLocalId(int value) async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.setInt('flock_id', value);
-  print('saved $value');
-}
-
-Future<Flocks> readFlocks(id) async {
+Future<Flock> readFlock(id) async {
   final String data = await httpGet("/flocks/$id/");
+  return parseFlock(data);
+}
+
+Future<List<Flock>> findFlocks(double lat, double lng) async {
+  final String data = await httpGet("/flocks/?lat=$lat&lng=$lng");
   return parseFlocks(data);
 }
 
-Flocks parseFlocks(String responseText) {
+Flock parseFlock(String responseText) {
   if (responseText == null || responseText.isEmpty) {
     return null;
   }
 
   final responseJson = json.decode(responseText);
-  return Flocks.fromJson(responseJson);
+  return Flock.fromJson(responseJson);
+}
+
+List<Flock> parseFlocks(String responseText) {
+  if (responseText == null || responseText.isEmpty) {
+    return null;
+  }
+
+  final List responseJson = json.decode(responseText);
+  return responseJson.map((jsonObject) => Flock.fromJson(jsonObject)).toList();
 }
 
 Future<Flocks> createFlocks(
-  String title,
-  String description,
-  String password,
-  String destination,
-  double latitude,
-  double longitude,
-  int leader_id,
-) async {
+    String title,
+    String description,
+    String password,
+    String destination,
+    double latitude,
+    double longitude,
+    int leader_id,
+    ) async {
   final String json =
       '{"title": "$title", "description": "$description","password": "$password"}, "destination": "$destination"}, "latitude": "$latitude"},"longitude": "$longitude"},"leader_id": "$leader_id"}';
   final String res = await httpPost('/flocks/', json);

@@ -1,15 +1,9 @@
-import 'package:flock_follow/data/flock.dart';
-import 'package:flock_follow/data/user_location.dart';
+import 'package:flock_follow/App/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
-// import 'dart:async';
-// import 'dart:convert';
 
-// import 'package:flock_follow/App/Join_flock.dart';
-// import 'package:flock_follow/App/New_Flock.dart';
-// import 'package:flock_follow/App/appbar.dart';
+import 'package:flock_follow/data/flock.dart';
+import 'package:flock_follow/data/user_location.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -64,7 +58,7 @@ class _HomePage extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/New_Flock');
+          Navigator.of(context).pushNamed('/new-flock');
         },
         tooltip: "new flock",
         child: Icon(Icons.add),
@@ -82,13 +76,7 @@ class _HomePage extends State<HomePage> {
       setState(() => _flocks = flocks);
     }
     catch (ex) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Can't access location"),
-          content: Text(ex.toString()),
-        ),
-      );
+      showAlert(context, ex, "Loading failed");
     }
   }
 }

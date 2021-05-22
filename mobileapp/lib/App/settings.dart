@@ -1,3 +1,4 @@
+import 'package:flock_follow/App/utilities.dart';
 import 'package:flock_follow/data/user.dart';
 import 'package:flutter/material.dart';
 
@@ -35,9 +36,6 @@ class _SettingsPage extends State<SettingsPage> {
     );
   }
 
-  Widget buildMessage(String message) =>
-      Scaffold(body: Center(child: Text(message)));
-
   Widget buildForm() {
     return Form(
       key: _formKey,
@@ -52,13 +50,14 @@ class _SettingsPage extends State<SettingsPage> {
           TextFormField(
             initialValue: user.about,
             decoration: const InputDecoration(labelText: 'About'),
+            validator: validateAbout,
             onSaved: (newValue) => user.about = newValue,
           ),
           TextFormField(
             initialValue: user.phone,
             decoration: const InputDecoration(labelText: 'Phone'),
-            onSaved: (newValue) => user.phone = newValue,
             validator: validatePhone,
+            onSaved: (newValue) => user.phone = newValue,
           ),
           Spacer(),
           ElevatedButton(
@@ -76,9 +75,15 @@ class _SettingsPage extends State<SettingsPage> {
     return null;
   }
 
+  String validateAbout(String value) {
+    // if (value == null || value.trim().isEmpty)
+    //   return "About is required!";
+    return null;
+  }
+
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Phone is required!";
+    // if (value == null || value.trim().isEmpty)
+    //   return "Phone is required!";
     return null;
   }
 
@@ -94,8 +99,14 @@ class _SettingsPage extends State<SettingsPage> {
   saveData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      await updateUser(user);
-      Navigator.pop(context);
+
+      try {
+        await updateUser(user);
+        Navigator.pop(context);
+      }
+      catch (ex) {
+        showAlert(context, ex, "Update settings failed");
+      }
     }
   }
 }

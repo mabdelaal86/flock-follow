@@ -68,23 +68,27 @@ List<Flock> parseFlocks(String responseText) {
   return responseJson.map((jsonObject) => Flock.fromJson(jsonObject)).toList();
 }
 
-Future<Flock> createFlocks(
+Future<Flock> createFlock(
     String title,
-    String description,
-    String password,
     String destination,
+    String password,
     double latitude,
     double longitude,
     int leaderId,
     ) async {
-  final String json =
-      '{"title": "$title", "description": "$description","password": "$password"}, "destination": "$destination"}, "latitude": "$latitude"},"longitude": "$longitude"},"leader_id": "$leaderId"}';
+  final String json = '{'
+      '"title": "$title", '
+      '"destination": "$destination", '
+      '"password": "$password", '
+      '"latitude": "$latitude", '
+      '"longitude": "$longitude", '
+      '"leader": $leaderId}';
   final String res = await httpPost('/flocks/', json);
   return parseFlock(res);
 }
 
-Future updateFlocks(Flock flock) async {
-  final String json =
-      '{"id": ${flock.id}, "title": "${flock.title}", "description": "${flock.description}", "password": "${flock.password}", "destination": "${flock.destination}", "latitude": "${flock.latitude}", "longitude": "${flock.longitude}", "leader_id": "${flock.leaderId}"}';
-  await httpPut('/flocks/${flock.id}/', json);
-}
+// Future updateFlocks(Flock flock) async {
+//   final String json =
+//       '{"id": ${flock.id}, "title": "${flock.title}", "description": "${flock.description}", "password": "${flock.password}", "destination": "${flock.destination}", "latitude": "${flock.latitude}", "longitude": "${flock.longitude}", "leader_id": "${flock.leaderId}"}';
+//   await httpPut('/flocks/${flock.id}/', json);
+// }

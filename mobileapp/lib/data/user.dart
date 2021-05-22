@@ -18,8 +18,8 @@ class User {
         about = json['about'] as String,
         phone = json['phone'] as String,
         status = json['status'] as String,
-        latitude = json['latitude'] as double,
-        longitude = json['longitude'] as double;
+        latitude = double.tryParse(json['latitude'] ?? ""),
+        longitude = double.tryParse(json['longitude'] ?? "");
 }
 
 Future<int> getUserLocalId() async {
@@ -49,13 +49,27 @@ User parseUser(String responseText) {
   return User.fromJson(responseJson);
 }
 
-Future<User> createUser(String name, String phone) async {
-  final String json = '{"name": "$name", "phone": "$phone"}';
+Future<User> createUser(
+    String name,
+    String phone,
+    double latitude,
+    double longitude) async {
+  final String json = '{'
+      '"name": "$name", '
+      '"phone": "$phone", '
+      '"latitude": "$latitude", '
+      '"longitude": "$longitude"}';
   final String res = await httpPost('/users/', json);
   return parseUser(res);
 }
 
 Future updateUser(User user) async {
-  final String json = '{"id": ${user.id}, "name": "${user.name}", "about": "${user.about}", "phone": "${user.phone}"}';
+  final String json = '{'
+      '"id": ${user.id}, '
+      '"name": "${user.name}", '
+      '"about": "${user.about}", '
+      '"phone": "${user.phone}", '
+      '"latitude": "${user.latitude}", '
+      '"longitude": "${user.longitude}"}';
   await httpPut('/users/${user.id}/', json);
 }

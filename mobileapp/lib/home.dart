@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'data/flock.dart';
+import 'data/user_location.dart';
 import 'utilities.dart';
-import 'package:flock_follow/data/flock.dart';
-import 'package:flock_follow/data/user_location.dart';
 
 class HomePage extends StatefulWidget {
   @override

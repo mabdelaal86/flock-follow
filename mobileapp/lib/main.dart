@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-import 'package:flock_follow/App/appbar.dart';
-import 'package:flock_follow/App/utilities.dart';
-import 'package:flock_follow/App/settings.dart';
-import 'package:flock_follow/App/home.dart';
-import 'package:flock_follow/App/register.dart';
-import 'package:flock_follow/App/new_flock_page.dart';
-import 'package:flock_follow/data/user.dart';
+import 'data/user.dart';
+import 'appbar.dart';
+import 'utilities.dart';
+import 'settings.dart';
+import 'home.dart';
+import 'register.dart';
+import 'new_flock_page.dart';
 
 void main() => runApp(
     Phoenix(child: MyApp())

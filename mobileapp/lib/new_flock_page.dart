@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
+import 'data/user_location.dart';
+import 'data/flock.dart';
+import 'data/user.dart';
 import 'utilities.dart';
-import 'package:flock_follow/data/user_location.dart';
-import 'package:flock_follow/data/flock.dart';
-import 'package:flock_follow/data/user.dart';
 
 class NewFlockPage extends StatefulWidget {
   @override

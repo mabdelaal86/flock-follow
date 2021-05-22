@@ -26,7 +26,8 @@ class _SettingsPage extends State<SettingsPage> {
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return buildMessage(snapshot.error.toString());
-            if (!snapshot.hasData) return buildMessage("Loading...");
+            if (!snapshot.hasData)
+              return buildMessage("Loading...");
             return buildForm();
           },
         ),
@@ -70,7 +71,8 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   String validatetitle(String value) {
-    if (value == null || value.trim().isEmpty) return "Flock Name is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Flock Name is required!";
     return null;
   }
 
@@ -81,7 +83,8 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   String validatePassword(String value) {
-    if (value == null || value.trim().isEmpty) return "Password is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Password is required!";
     return null;
   }
 

@@ -26,7 +26,8 @@ class _SettingsPage extends State<SettingsPage> {
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return buildMessage(snapshot.error.toString());
-            if (!snapshot.hasData) return buildMessage("Loading...");
+            if (!snapshot.hasData)
+              return buildMessage("Loading...");
             return buildForm();
           },
         ),
@@ -70,12 +71,14 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   String validateName(String value) {
-    if (value == null || value.trim().isEmpty) return "Name is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Name is required!";
     return null;
   }
 
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty) return "Phone is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Phone is required!";
     return null;
   }
 

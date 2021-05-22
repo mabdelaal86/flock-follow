@@ -55,12 +55,14 @@ class _RegisterPage extends State<RegisterPage> {
   }
 
   String validateName(String value) {
-    if (value == null || value.trim().isEmpty) return "Name is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Name is required!";
     return null;
   }
 
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty) return "Phone is required!";
+    if (value == null || value.trim().isEmpty)
+      return "Phone is required!";
     return null;
   }
 

@@ -38,8 +38,10 @@ class _MainPage extends State<MainPage> {
     return FutureBuilder<int>(
       future: getUserLocalId(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return Scaffold(body: Center(child: Text("Loading...")));
-        if (snapshot.data == 0) return RegisterPage();
+        if (!snapshot.hasData)
+          return Scaffold(body: Center(child: Text("Loading...")));
+        if (snapshot.data == 0)
+          return RegisterPage();
         return HomePage();
       },
     );

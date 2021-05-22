@@ -1,13 +1,14 @@
-import 'package:flock_follow/App/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
+import 'package:flock_follow/App/appbar.dart';
+import 'package:flock_follow/App/utilities.dart';
 import 'package:flock_follow/App/settings.dart';
 import 'package:flock_follow/App/home.dart';
-import 'package:flock_follow/data/user.dart';
 import 'package:flock_follow/App/register.dart';
 import 'package:flock_follow/App/new_flock_page.dart';
+import 'package:flock_follow/data/user.dart';
 
 void main() => runApp(
     Phoenix(child: MyApp())
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/settings": (BuildContext context) => SettingsPage(),
         "/new-flock": (BuildContext context) => NewFlockPage(),
-        // "/appbar": (BuildContext) => AppBarMapMembersMessages(),
+        "/appbar": (BuildContext context) => AppBarPage(),
         // "/Join_flock": (BuildContext) => JoinFlock(),
       },
     );

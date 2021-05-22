@@ -1,82 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
-
-class AppBarMapMembersMessages extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(text: 'Members', icon: Icon(Icons.people)),
-                Tab(text: 'Map', icon: Icon(Icons.map)),
-                Tab(text: 'Messages' ,icon: Icon(Icons.message)),
-              ],
-            ),
-            title: Text('ver home new flock name'),
-          ),
-          body: TabBarView(
-            children: [ 
-              Icon(Icons.map),
-              Map(),
-              Messages(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-//Map
-
-class Map extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return Map1();
-  }
-}
-
-class Map1 extends State{
-  List<Marker> allMarkers = [];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Maps'),
-      ),
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: GoogleMap(
-            initialCameraPosition:
-              CameraPosition(target: LatLng(40.7128, -74.0060), 
-              zoom: 12.0),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-
-//Messages
 
 final ThemeData iOSTheme = ThemeData(
   primarySwatch: Colors.red,
@@ -96,9 +21,8 @@ class Messages extends StatelessWidget {
   Widget build(BuildContext ctx) {
     return MaterialApp(
       title: "Chat Application",
-      theme: defaultTargetPlatform == TargetPlatform.iOS
-        ? iOSTheme
-        : androidTheme,
+      theme:
+      defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
       home: Chat(),
     );
   }
@@ -119,13 +43,12 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     return Scaffold(
       body: Column(children: <Widget>[
         Flexible(
-          child: ListView.builder(
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
-            reverse: true,
-            padding: EdgeInsets.all(6.0),
-          )
-        ),
+            child: ListView.builder(
+              itemBuilder: (_, int index) => _messages[index],
+              itemCount: _messages.length,
+              reverse: true,
+              padding: EdgeInsets.all(6.0),
+            )),
         Divider(height: 1.0),
         Container(
           child: _buildComposer(),
@@ -135,11 +58,10 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     );
   }
 
-
   Widget _buildComposer() {
     return IconTheme(
-        data: IconThemeData(color: Theme.of(context).accentColor),
-        child: Container(
+      data: IconThemeData(color: Theme.of(context).accentColor),
+      child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 9.0),
           child: Row(
             children: <Widget>[
@@ -153,32 +75,29 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                   },
                   onSubmitted: _submitMsg,
                   decoration:
-                    InputDecoration.collapsed(hintText: "Type a message"),
-                  ),
+                  InputDecoration.collapsed(hintText: "Type a message"),
+                ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 3.0),
-                child: Theme.of(context).platform == TargetPlatform.iOS
-                  ? CupertinoButton(
-                    child: Text("Submit"),
-                    onPressed: _isWriting ? () => _submitMsg(_textController.text)
-                        : null
-                )
-                    :  IconButton(
+                  margin: EdgeInsets.symmetric(horizontal: 3.0),
+                  child: Theme.of(context).platform == TargetPlatform.iOS
+                      ? CupertinoButton(
+                      child: Text("Submit"),
+                      onPressed: _isWriting
+                          ? () => _submitMsg(_textController.text)
+                          : null)
+                      : IconButton(
                     icon: Icon(Icons.send),
                     onPressed: _isWriting
-                      ? () => _submitMsg(_textController.text)
+                        ? () => _submitMsg(_textController.text)
                         : null,
-                )
-              ),
+                  )),
             ],
           ),
           decoration: Theme.of(context).platform == TargetPlatform.iOS
-          ? BoxDecoration(
-            border:
-               Border(top : BorderSide(color: Colors.brown))) :
-              null
-        ),
+              ? BoxDecoration(
+              border: Border(top: BorderSide(color: Colors.brown)))
+              : null),
     );
   }
 
@@ -190,9 +109,7 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     Msg msg = Msg(
       txt: txt,
       animationController: AnimationController(
-          vsync: this,
-        duration: Duration(milliseconds: 800)
-      ),
+          vsync: this, duration: Duration(milliseconds: 800)),
     );
     setState(() {
       _messages.insert(0, msg);
@@ -207,7 +124,6 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     }
     super.dispose();
   }
-
 }
 
 class Msg extends StatelessWidget {
@@ -218,8 +134,8 @@ class Msg extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return SizeTransition(
-      sizeFactor: CurvedAnimation(
-          parent: animationController, curve: Curves.easeOut),
+      sizeFactor:
+      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -231,7 +147,7 @@ class Msg extends StatelessWidget {
               child: CircleAvatar(child: Text(defaultUserName[0])),
             ),
             Expanded(
-              child:  Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(defaultUserName, style: Theme.of(ctx).textTheme.subhead),

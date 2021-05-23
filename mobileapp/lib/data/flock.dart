@@ -86,3 +86,16 @@ Future<Flock> createFlock(
   final String res = await httpPost('/flocks/', json);
   return parseFlock(res);
 }
+
+Future updateFlock(Flock flock) async {
+  final String json = '{'
+      '"id": ${flock.id}, '
+      '"title": "${flock.title}", '
+      '"destination": "${flock.destination}", '
+      '"password": "${flock.password}", '
+      '"latitude": "${flock.latitude}", '
+      '"longitude": "${flock.longitude}", '
+      '"status": "${flock.status}", '
+      '"leader": ${flock.leaderId}}';
+  await httpPut('/flocks/${flock.id}/', json);
+}

@@ -1,4 +1,4 @@
-from django.db.models import F
+from django.db.models import F, Q
 from django.db.models.functions import math
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -42,7 +42,7 @@ class FlockList(APIView):
             return Response(serializer.data)
 
         q = Flock.objects.annotate(distence=math.Sqrt((F('latitude')-lat) ** 2 + (F('longitude')-lng) ** 2))
-        flocks = q.filter(distence__lte=0.05)
+        flocks = q.filter(Q(distence__lte=0.05) & (Q(status='C') | Q(status='S')))
         serializer = FlockSerializer(flocks, many=True)
         return Response(serializer.data)
 
@@ -50,6 +50,11 @@ class FlockList(APIView):
         serializer = FlockSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+
+            flock = Flock.objects.get(pk=serializer.data['id']);
+            user = User.objects.get(pk=serializer.data['leader'])
+            flock.members.add(user)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -9,7 +9,7 @@ class AppStatus {
 
   bool get registered => user != null;
   bool get joinedFlock => flock != null;
-  bool get isLeader => joinedFlock && flock.leaderId != user.id;
+  bool get isLeader => joinedFlock && flock.leaderId == user.id;
 }
 
 Future<AppStatus> getAppStatus() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'data/flock.dart';
 import 'data/user_location.dart';
@@ -40,25 +41,28 @@ class _HomePage extends State<HomePage> {
           PopupMenuButton<String>(
             onSelected: (route) {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => onMenuSelection(route)),
+                MaterialPageRoute(builder: (context) => onMenuSelection(route)),
               );
             },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            itemBuilder: (BuildContext context) =>
+            <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
-                  value: "/settings",
-                  child: Text('Settings'),
+                value: "/settings",
+                child: Text('Settings'),
               ),
             ],
           ),
         ],
       ),
       body: ListView(
-        children: _flocks.map((flock) => Card(
-          child: ListTile(
-            title: Text(flock.title),
-            subtitle: Text(flock.flockStatus),
-          ),
-        )).toList(),
+        children: _flocks.map((flock) =>
+            Card(
+              child: ListTile(
+                title: Text(flock.title),
+                subtitle: Text(flock.flockStatus),
+                onTap: () => askForPassword(flock),
+              ),
+            )).toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -88,7 +92,24 @@ class _HomePage extends State<HomePage> {
       setState(() => _flocks = flocks);
     }
     catch (ex) {
-      showAlert(context, ex, "Loading failed");
+      await showAlert(context, ex, "Loading failed");
     }
+  }
+
+  askForPassword(Flock flock) async {
+    final pwd = await showInputDialog(context, "Join Flock",
+      hintText: "Enter Password",
+      message: "To join/view this flock you must provide a password.\n\nPlease contact the flock leader for the password.",
+      obscureText: true,
+    );
+    if (pwd == null || pwd == "")
+      return;
+    if (pwd != flock.password) {
+      await showAlert(context, "Wrong password!", "Join Failed");
+      return;
+    }
+    await joinFlock(flock.id, widget.appStatus.user.id);
+
+    Phoenix.rebirth(context);
   }
 }

@@ -36,7 +36,7 @@ class Flock(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250, blank=True)
     status = models.CharField(max_length=1, choices=FLOCK_STATUSES, default='C')
-    password = models.CharField(max_length=20, blank=True)
+    password = models.CharField(max_length=20)
     destination = models.CharField(max_length=250, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=7)
     longitude = models.DecimalField(max_digits=10, decimal_places=7)

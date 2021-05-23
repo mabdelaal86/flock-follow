@@ -16,7 +16,7 @@ Future<String> httpPost(String url, data) async {
     headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8' },
     body: data,
   );
-  if (response.statusCode == 201) {
+  if ([200, 201, 204].contains(response.statusCode)) {
     return response.body;
   } else {
     throw Exception('Failed to load data');

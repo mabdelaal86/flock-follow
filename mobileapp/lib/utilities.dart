@@ -7,7 +7,7 @@ Widget buildMessage(String message) =>
 Widget buildAlert(dynamic ex, String title) =>
     AlertDialog(title: Text(title), content: Text(ex.toString()));
 
-void showAlert(BuildContext context, dynamic ex, String title) =>
+Future showAlert(BuildContext context, dynamic ex, String title) =>
     showDialog(
       context: context,
       builder: (context) => buildAlert(ex, title),

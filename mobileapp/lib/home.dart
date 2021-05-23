@@ -92,19 +92,20 @@ class _HomePage extends State<HomePage> {
       setState(() => _flocks = flocks);
     }
     catch (ex) {
-      showAlert(context, ex, "Loading failed");
+      await showAlert(context, ex, "Loading failed");
     }
   }
 
   askForPassword(Flock flock) async {
     final pwd = await showInputDialog(context, "Join Flock",
+      hintText: "Enter Password",
       message: "To join/view this flock you must provide a password.\n\nPlease contact the flock leader for the password.",
       obscureText: true,
     );
     if (pwd == null || pwd == "")
       return;
     if (pwd != flock.password) {
-      showAlert(context, "Wrong password!", "Join Failed");
+      await showAlert(context, "Wrong password!", "Join Failed");
       return;
     }
     await joinFlock(flock.id, widget.appStatus.user.id);

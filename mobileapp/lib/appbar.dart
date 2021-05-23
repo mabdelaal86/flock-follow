@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
+import 'data/app_status.dart';
 import 'members.dart';
 import 'messages.dart';
 import 'map.dart';
 
 class AppBarPage extends StatelessWidget {
+  final AppStatus appStatus;
+
+  const AppBarPage(this.appStatus, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +23,8 @@ class AppBarPage extends StatelessWidget {
             actions: [
               IconButton(
                   icon: Icon(Icons.refresh),
-                  onPressed: () => Navigator.of(context).pushNamed('/appbar')),
+                  onPressed: () => Phoenix.rebirth(context)
+              ),
             ],
             bottom: TabBar(
               tabs: [

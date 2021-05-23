@@ -6,7 +6,7 @@ import 'data/app_status.dart';
 import 'data/flock.dart';
 import 'data/member.dart';
 import 'members.dart';
-import 'messages.dart';
+// import 'messages.dart';
 import 'map.dart';
 
 class AppBarPage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _AppBarPage extends State<AppBarPage> {
               tabs: [
                 Tab(text: 'Members'),
                 Tab(text: 'Map'),
-                Tab(text: 'Messages'),
+                // Tab(text: 'Messages'),
               ],
             ),
             title: Text(widget.appStatus.flock.title),
@@ -63,7 +63,7 @@ class _AppBarPage extends State<AppBarPage> {
             children: [
               MembersPage(widget.appStatus),
               Map(),
-              Messages(),
+              // Messages(),
             ],
           ),
           floatingActionButton: !widget.appStatus.isLeader ? null : FloatingActionButton(

@@ -57,6 +57,7 @@ class _HomePage extends State<HomePage> {
           child: ListTile(
             title: Text(flock.title),
             subtitle: Text(flock.flockStatus),
+            onTap: () => joinFlock(flock),
           ),
         )).toList(),
       ),
@@ -91,4 +92,17 @@ class _HomePage extends State<HomePage> {
       showAlert(context, ex, "Loading failed");
     }
   }
+
+  joinFlock(Flock flock) async {
+    final pwd = await showInputDialog(context, "Join Flock",
+        message: "To join/view this flock you must provide a password.\n\nPlease contact the flock leader for the password.",
+        obscureText: true,
+    );
+    if (pwd == null || pwd == "")
+      return;
+    if (pwd != flock.password){
+      showAlert(context, "Wrong password!", "Join Failed");
+      return;
+    }
+
 }

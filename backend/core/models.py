@@ -20,10 +20,10 @@ class User(models.Model):
         return f'[{self.id}]: {self.name[:20]}'
 
     def joining_flock(self) -> 'Flock':
-        return self.joined_flocks.filter(status='S').first()
+        return self.joined_flocks.filter(models.Q(status='C') | models.Q(status='S')).first()
 
     def managing_flock(self) -> 'Flock':
-        return self.created_flocks.filter(status='S').first()
+        return self.created_flocks.filter(models.Q(status='C') | models.Q(status='S')).first()
 
 
 class Flock(models.Model):

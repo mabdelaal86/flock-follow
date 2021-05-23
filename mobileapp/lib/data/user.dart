@@ -11,15 +11,22 @@ class User {
   String status;
   double latitude;
   double longitude;
+  int joiningFlockId;
+  int managingFlockId;
 
-  User.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int,
+  User.fromJson(Map<String, dynamic> json):
+        id = json['id'] as int,
         name = json['name'] as String,
-        about = json['about'] as String,
-        phone = json['phone'] as String,
-        status = json['status'] as String,
+        about = (json['about'] ?? "") as String,
+        phone = (json['phone'] ?? "") as String,
         latitude = double.tryParse(json['latitude'] ?? ""),
-        longitude = double.tryParse(json['longitude'] ?? "");
+        longitude = double.tryParse(json['longitude'] ?? ""),
+        joiningFlockId = (json['joining_flock'] ?? 0) as int,
+        managingFlockId = (json['managing_flock'] ?? 0) as int,
+        status = json['status'] as String;
+  
+  int get currentFlockId =>
+      managingFlockId > 0 ? managingFlockId : joiningFlockId;
 }
 
 Future<int> getUserLocalId() async {

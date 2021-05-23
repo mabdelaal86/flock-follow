@@ -1,9 +1,10 @@
-import 'package:flock_follow/App/utilities.dart';
-import 'package:flock_follow/data/user_location.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-import 'package:flock_follow/data/flock.dart';
-import 'package:flock_follow/data/user.dart';
+import 'data/user_location.dart';
+import 'data/flock.dart';
+import 'data/user.dart';
+import 'utilities.dart';
 
 class NewFlockPage extends StatefulWidget {
   @override
@@ -83,7 +84,8 @@ class _NewFlockPage extends State<NewFlockPage> {
         await createFlock(
             _flockTitle, _flockDestination, _flockPassword,
             l.latitude, l.longitude, userId);
-        Navigator.pop(context);
+
+        Phoenix.rebirth(context);
       }
       catch (ex) {
         showAlert(context, ex, "Creating new flock failed");

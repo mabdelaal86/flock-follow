@@ -16,8 +16,8 @@ class Flock {
   DateTime finishedAt;
   int leaderId;
 
-  Flock.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int,
+  Flock.fromJson(Map<String, dynamic> json):
+        id = json['id'] as int,
         title = json['title'] as String,
         description = json['description'] as String,
         status = json['status'] as String,
@@ -67,3 +67,28 @@ List<Flock> parseFlocks(String responseText) {
   final List responseJson = json.decode(responseText);
   return responseJson.map((jsonObject) => Flock.fromJson(jsonObject)).toList();
 }
+
+Future<Flock> createFlock(
+    String title,
+    String destination,
+    String password,
+    double latitude,
+    double longitude,
+    int leaderId,
+    ) async {
+  final String json = '{'
+      '"title": "$title", '
+      '"destination": "$destination", '
+      '"password": "$password", '
+      '"latitude": "$latitude", '
+      '"longitude": "$longitude", '
+      '"leader": $leaderId}';
+  final String res = await httpPost('/flocks/', json);
+  return parseFlock(res);
+}
+
+// Future updateFlocks(Flock flock) async {
+//   final String json =
+//       '{"id": ${flock.id}, "title": "${flock.title}", "description": "${flock.description}", "password": "${flock.password}", "destination": "${flock.destination}", "latitude": "${flock.latitude}", "longitude": "${flock.longitude}", "leader_id": "${flock.leaderId}"}';
+//   await httpPut('/flocks/${flock.id}/', json);
+// }

@@ -1,13 +1,23 @@
-import 'package:flock_follow/data/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+
+import 'data/app_status.dart';
+import 'data/user.dart';
+import 'utilities.dart';
 
 class SettingsPage extends StatefulWidget {
+  static const routeName = "";
+  final AppStatus appStatus;
+
+  const SettingsPage(this.appStatus, {Key key}) : super(key: key);
+
   @override
-  _SettingsPage createState() { return _SettingsPage(); }
+  _SettingsPage createState() {
+    return _SettingsPage();
+  }
 }
 
 class _SettingsPage extends State<SettingsPage> {
-  User user;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -19,21 +29,10 @@ class _SettingsPage extends State<SettingsPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: FutureBuilder(
-          future: loadData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError)
-              return buildMessage(snapshot.error.toString());
-            if (!snapshot.hasData)
-              return buildMessage("Loading...");
-            return buildForm();
-          },
-        ),
+        child: buildForm(),
       ),
     );
   }
-
-  Widget buildMessage(String message) => Scaffold(body: Center(child: Text(message)));
 
   Widget buildForm() {
     return Form(
@@ -41,21 +40,22 @@ class _SettingsPage extends State<SettingsPage> {
       child: Column(
         children: <Widget>[
           TextFormField(
-            initialValue: user.name,
+            initialValue: widget.appStatus.user.name,
             decoration: const InputDecoration(labelText: 'Name'),
             validator: validateName,
-            onSaved: (newValue) => user.name = newValue,
+            onSaved: (newValue) => widget.appStatus.user.name = newValue,
           ),
           TextFormField(
-            initialValue: user.about,
+            initialValue: widget.appStatus.user.about,
             decoration: const InputDecoration(labelText: 'About'),
-            onSaved: (newValue) => user.about = newValue,
+            validator: validateAbout,
+            onSaved: (newValue) => widget.appStatus.user.about = newValue,
           ),
           TextFormField(
-            initialValue: user.phone,
+            initialValue: widget.appStatus.user.phone,
             decoration: const InputDecoration(labelText: 'Phone'),
-            onSaved: (newValue) => user.phone = newValue,
             validator: validatePhone,
+            onSaved: (newValue) => widget.appStatus.user.phone = newValue,
           ),
           Spacer(),
           ElevatedButton(
@@ -73,26 +73,30 @@ class _SettingsPage extends State<SettingsPage> {
     return null;
   }
 
-  String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Phone is required!";
+  String validateAbout(String value) {
+    // if (value == null || value.trim().isEmpty)
+    //   return "About is required!";
     return null;
   }
 
-  Future<User> loadData() async {
-    final userId = await getUserLocalId();
-
-    user = await readUser(userId);
-    print("name: " + user.name);
-
-    return user;
+  String validatePhone(String value) {
+    // if (value == null || value.trim().isEmpty)
+    //   return "Phone is required!";
+    return null;
   }
 
   saveData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      await updateUser(user);
-      Navigator.pop(context);
+
+      try {
+        await updateUser(widget.appStatus.user);
+        Navigator.pop(context);
+      }
+      catch (ex) {
+        showAlert(context, ex, "Update settings failed");
+        Phoenix.rebirth(context);
+      }
     }
   }
 }

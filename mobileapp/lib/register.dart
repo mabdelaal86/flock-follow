@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-import 'package:flock_follow/data/user.dart';
+import 'data/user_location.dart';
+import 'data/user.dart';
+import 'utilities.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
-  _RegisterPage createState() { return _RegisterPage(); }
+  _RegisterPage createState() {
+    return _RegisterPage();
+  }
 }
 
 class _RegisterPage extends State<RegisterPage> {
@@ -59,17 +63,25 @@ class _RegisterPage extends State<RegisterPage> {
   }
 
   String validatePhone(String value) {
-    if (value == null || value.trim().isEmpty)
-      return "Phone is required!";
+    // if (value == null || value.trim().isEmpty)
+    //   return "Phone is required!";
     return null;
   }
 
   saveData() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      final User user = await createUser(_userName, _userPhone);
-      await setUserLocalId(user.id);
-      Phoenix.rebirth(context);
+
+      try {
+        final l = await determinePosition();
+        print("* Location: {$l}");
+        final User user = await createUser(_userName, _userPhone, l.latitude, l.longitude);
+        await setUserLocalId(user.id);
+        Phoenix.rebirth(context);
+      }
+      catch (ex) {
+        showAlert(context, ex, "Registration failed");
+      }
     }
   }
 }

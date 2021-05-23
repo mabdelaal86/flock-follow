@@ -11,15 +11,22 @@ class User {
   String status;
   double latitude;
   double longitude;
+  int joiningFlockId;
+  int managingFlockId;
 
-  User.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int,
+  User.fromJson(Map<String, dynamic> json):
+        id = json['id'] as int,
         name = json['name'] as String,
-        about = json['about'] as String,
-        phone = json['phone'] as String,
-        status = json['status'] as String,
-        latitude = json['latitude'] as double,
-        longitude = json['longitude'] as double;
+        about = (json['about'] ?? "") as String,
+        phone = (json['phone'] ?? "") as String,
+        latitude = double.tryParse(json['latitude'] ?? ""),
+        longitude = double.tryParse(json['longitude'] ?? ""),
+        joiningFlockId = (json['joining_flock'] ?? 0) as int,
+        managingFlockId = (json['managing_flock'] ?? 0) as int,
+        status = json['status'] as String;
+  
+  int get currentFlockId =>
+      managingFlockId > 0 ? managingFlockId : joiningFlockId;
 }
 
 Future<int> getUserLocalId() async {
@@ -49,13 +56,27 @@ User parseUser(String responseText) {
   return User.fromJson(responseJson);
 }
 
-Future<User> createUser(String name, String phone) async {
-  final String json = '{"name": "$name", "phone": "$phone"}';
+Future<User> createUser(
+    String name,
+    String phone,
+    double latitude,
+    double longitude) async {
+  final String json = '{'
+      '"name": "$name", '
+      '"phone": "$phone", '
+      '"latitude": "$latitude", '
+      '"longitude": "$longitude"}';
   final String res = await httpPost('/users/', json);
   return parseUser(res);
 }
 
 Future updateUser(User user) async {
-  final String json = '{"id": ${user.id}, "name": "${user.name}", "about": "${user.about}", "phone": "${user.phone}"}';
+  final String json = '{'
+      '"id": ${user.id}, '
+      '"name": "${user.name}", '
+      '"about": "${user.about}", '
+      '"phone": "${user.phone}", '
+      '"latitude": "${user.latitude}", '
+      '"longitude": "${user.longitude}"}';
   await httpPut('/users/${user.id}/', json);
 }

@@ -1,110 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
-class AppBarMapMembersMessages extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.lightGreen,
-            actions: [
-              IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/appbar');
-                  }),
-              IconButton(
-                  icon: Icon(Icons.vertical_align_bottom), onPressed: null)
-            ],
-            bottom: TabBar(
-              tabs: [
-                Tab(text: 'Members', icon: Icon(Icons.people)),
-                Tab(text: 'Map', icon: Icon(Icons.map)),
-                Tab(text: 'Messages', icon: Icon(Icons.message)),
-              ],
-            ),
-            title: Text('ver home new flock name'),
-          ),
-          body: TabBarView(
-            children: [
-              Members(),
-              Map(),
-              Messages(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-//Members
-
-class Members extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return _buildCard();
-  }
-
-  Widget _buildCard() => SizedBox(
-        child: Card(
-          child: Column(
-            children: [
-              ListTile(
-                title: Text('Mohamed Abdel-Aal'),
-                leading: Icon(
-                  Icons.account_circle,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-}
-
-//Map
-
-class Map extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return Map1();
-  }
-}
-
-class Map1 extends State {
-  List<Marker> allMarkers = [];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: GoogleMap(
-            initialCameraPosition:
-                CameraPosition(target: LatLng(40.7128, -74.0060), zoom: 12.0),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/ ');
-        },
-        tooltip: "",
-        child: Icon(Icons.access_alarm),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
-}
-
-//Messages
 
 final ThemeData iOSTheme = ThemeData(
   primarySwatch: Colors.red,
@@ -125,7 +22,7 @@ class Messages extends StatelessWidget {
     return MaterialApp(
       title: "Chat Application",
       theme:
-          defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
+      defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
       home: Chat(),
     );
   }
@@ -147,11 +44,11 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
       body: Column(children: <Widget>[
         Flexible(
             child: ListView.builder(
-          itemBuilder: (_, int index) => _messages[index],
-          itemCount: _messages.length,
-          reverse: true,
-          padding: EdgeInsets.all(6.0),
-        )),
+              itemBuilder: (_, int index) => _messages[index],
+              itemCount: _messages.length,
+              reverse: true,
+              padding: EdgeInsets.all(6.0),
+            )),
         Divider(height: 1.0),
         Container(
           child: _buildComposer(),
@@ -178,28 +75,28 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                   },
                   onSubmitted: _submitMsg,
                   decoration:
-                      InputDecoration.collapsed(hintText: "Type a message"),
+                  InputDecoration.collapsed(hintText: "Type a message"),
                 ),
               ),
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 3.0),
                   child: Theme.of(context).platform == TargetPlatform.iOS
                       ? CupertinoButton(
-                          child: Text("Submit"),
-                          onPressed: _isWriting
-                              ? () => _submitMsg(_textController.text)
-                              : null)
+                      child: Text("Submit"),
+                      onPressed: _isWriting
+                          ? () => _submitMsg(_textController.text)
+                          : null)
                       : IconButton(
-                          icon: Icon(Icons.send),
-                          onPressed: _isWriting
-                              ? () => _submitMsg(_textController.text)
-                              : null,
-                        )),
+                    icon: Icon(Icons.send),
+                    onPressed: _isWriting
+                        ? () => _submitMsg(_textController.text)
+                        : null,
+                  )),
             ],
           ),
           decoration: Theme.of(context).platform == TargetPlatform.iOS
               ? BoxDecoration(
-                  border: Border(top: BorderSide(color: Colors.brown)))
+              border: Border(top: BorderSide(color: Colors.brown)))
               : null),
     );
   }
@@ -238,7 +135,7 @@ class Msg extends StatelessWidget {
   Widget build(BuildContext ctx) {
     return SizeTransition(
       sizeFactor:
-          CurvedAnimation(parent: animationController, curve: Curves.easeOut),
+      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),

@@ -1,17 +1,18 @@
-import 'package:flock_follow/data/flock.dart';
-import 'package:flock_follow/data/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
-// import 'dart:async';
-// import 'dart:convert';
 
-// import 'package:flock_follow/App/Join_flock.dart';
-// import 'package:flock_follow/App/New_Flock.dart';
-// import 'package:flock_follow/App/appbar.dart';
+import 'data/flock.dart';
+import 'data/user_location.dart';
+import 'data/app_status.dart';
+import 'settings.dart';
+import 'utilities.dart';
+import 'new_flock_page.dart';
 
 class HomePage extends StatefulWidget {
+  final AppStatus appStatus;
+
+  const HomePage(this.appStatus, {Key key}) : super(key: key);
+
   @override
   _HomePage createState() => _HomePage();
 }
@@ -37,9 +38,16 @@ class _HomePage extends State<HomePage> {
             onPressed: () => loadFlocks(context),
           ),
           PopupMenuButton<String>(
-            onSelected: (route) { Navigator.of(context).pushNamed(route); },
+            onSelected: (route) {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => onMenuSelection(route)),
+              );
+            },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(value: "/settings", child: Text('Settings')),
+              const PopupMenuItem<String>(
+                  value: "/settings",
+                  child: Text('Settings'),
+              ),
             ],
           ),
         ],
@@ -49,23 +57,26 @@ class _HomePage extends State<HomePage> {
           child: ListTile(
             title: Text(flock.title),
             subtitle: Text(flock.flockStatus),
-            trailing: Image(
-              image: NetworkImage("https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78"),
-              width: 100,
-              height: 100,
-            ),
           ),
         )).toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/New_Flock');
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => NewFlockPage()),
+          );
         },
         tooltip: "new flock",
         child: Icon(Icons.add),
         backgroundColor: Colors.green,
       ),
     );
+  }
+
+  Widget onMenuSelection(String route) {
+    if (route == "/settings")
+      return SettingsPage(widget.appStatus);
+    throw "Unknown route!";
   }
 
   loadFlocks(BuildContext context) async {
@@ -77,13 +88,7 @@ class _HomePage extends State<HomePage> {
       setState(() => _flocks = flocks);
     }
     catch (ex) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Can't access location"),
-          content: Text(ex.toString()),
-        ),
-      );
+      showAlert(context, ex, "Loading failed");
     }
   }
 }

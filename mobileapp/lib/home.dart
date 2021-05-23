@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'data/flock.dart';
+import 'data/member.dart';
 import 'data/user_location.dart';
 import 'data/app_status.dart';
 import 'settings.dart';

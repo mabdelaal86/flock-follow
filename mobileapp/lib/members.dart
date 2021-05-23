@@ -1,25 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'data/app_status.dart';
+import 'data/member.dart';
+import 'data/user.dart';
+import 'utilities.dart';
 
-class Members extends StatelessWidget {
+class MembersPage extends StatefulWidget {
+  final AppStatus appStatus;
+
+  const MembersPage(this.appStatus, {Key key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return _buildCard();
+  _MembersPage createState() => _MembersPage();
+}
+
+class _MembersPage extends State<MembersPage> {
+  List<User> _members = <User>[];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => loadMembers(context));
   }
 
-  Widget _buildCard() => SizedBox(
-    child: Card(
-      child: Column(
-        children: [
-          ListTile(
-            title: Text('Mohamed Abdel-Aal'),
-            leading: Icon(
-              Icons.account_circle,
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: _members.map((member) =>
+          Card(
+            child: ListTile(
+              title: Text(member.name),
+              subtitle: Text(member.about),
+              trailing: member.phone.isEmpty ? null : IconButton(
+                icon: const Icon(Icons.call),
+                onPressed: () => launch("tel://${member.phone}"),
+              ),
             ),
-          ),
-        ],
-      ),
-    ),
-  );
+          )).toList(),
+    );
+  }
+
+  loadMembers(BuildContext context) async {
+    try {
+      final members = await getFlockMembers(widget.appStatus.flock.id);
+      setState(() => _members = members);
+    }
+    catch (ex) {
+      await showAlert(context, ex, "Loading failed");
+    }
+  }
+
 }
+

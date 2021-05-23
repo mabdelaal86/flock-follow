@@ -56,6 +56,15 @@ User parseUser(String responseText) {
   return User.fromJson(responseJson);
 }
 
+List<User> parseUsers(String responseText) {
+  if (responseText == null || responseText.isEmpty) {
+    return null;
+  }
+
+  final List responseJson = json.decode(responseText);
+  return responseJson.map((jsonObject) => User.fromJson(jsonObject)).toList();
+}
+
 Future<User> createUser(
     String name,
     String phone,

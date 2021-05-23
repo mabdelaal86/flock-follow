@@ -33,11 +33,11 @@ class AppBarPage extends StatelessWidget {
                 Tab(text: 'Messages'),
               ],
             ),
-            title: Text('ver home new flock name'),
+            title: Text(appStatus.flock.title),
           ),
           body: TabBarView(
             children: [
-              Members(),
+              MembersPage(appStatus),
               Map(),
               Messages(),
             ],

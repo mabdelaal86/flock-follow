@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flock_follow/data/backend.dart';
+import 'backend.dart';
 
 class Flock {
   int id;
@@ -85,8 +85,4 @@ Future<Flock> createFlock(
       '"leader": $leaderId}';
   final String res = await httpPost('/flocks/', json);
   return parseFlock(res);
-}
-
-Future joinFlock(int flockId, int userId) async {
-  await httpPost('/flocks/$flockId/members/$userId/', null);
 }

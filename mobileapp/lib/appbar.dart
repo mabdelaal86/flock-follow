@@ -62,7 +62,7 @@ class _AppBarPage extends State<AppBarPage> {
           body: TabBarView(
             children: [
               MembersPage(widget.appStatus),
-              Map(),
+              MapPage(widget.appStatus),
               Messages(),
             ],
           ),

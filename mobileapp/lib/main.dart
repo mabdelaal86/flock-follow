@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'data/app_status.dart';
-import 'appbar.dart';
+import 'map.dart';
 import 'utilities.dart';
 import 'home.dart';
 import 'register.dart';
@@ -39,7 +39,7 @@ class _MainPage extends State<MainPage> {
           return RegisterPage();
         if (!snapshot.data.joinedFlock)
           return HomePage(snapshot.data);
-        return AppBarPage(snapshot.data);
+        return MapPage(snapshot.data);
       },
     );
   }

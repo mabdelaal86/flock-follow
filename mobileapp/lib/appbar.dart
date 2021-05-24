@@ -6,7 +6,7 @@ import 'data/app_status.dart';
 import 'data/flock.dart';
 import 'data/member.dart';
 import 'members.dart';
-// import 'messages.dart';
+import 'messages.dart';
 import 'map.dart';
 
 class AppBarPage extends StatefulWidget {
@@ -62,8 +62,8 @@ class _AppBarPage extends State<AppBarPage> {
           body: TabBarView(
             children: [
               MembersPage(widget.appStatus),
-              Map(),
-              // Messages(),
+              MapPage(widget.appStatus),
+              Messages(),
             ],
           ),
           floatingActionButton: !widget.appStatus.isLeader ? null : FloatingActionButton(

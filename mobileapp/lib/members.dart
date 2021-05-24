@@ -27,18 +27,24 @@ class _MembersPage extends State<MembersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: _members.map((member) =>
-          Card(
-            child: ListTile(
-              title: Text(member.name),
-              subtitle: Text(member.about),
-              trailing: member.phone.isEmpty ? null : IconButton(
-                icon: const Icon(Icons.call),
-                onPressed: () => launch("tel://${member.phone}"),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text("Members"),
+      ),
+      body: ListView(
+        children: _members.map((member) =>
+            Card(
+              child: ListTile(
+                title: Text(member.name),
+                subtitle: Text(member.about),
+                trailing: member.phone.isEmpty ? null : IconButton(
+                  icon: const Icon(Icons.call),
+                  onPressed: () => launch("tel://${member.phone}"),
+                ),
               ),
-            ),
-          )).toList(),
+            )).toList(),
+      ),
     );
   }
 

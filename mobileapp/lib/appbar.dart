@@ -54,7 +54,7 @@ class _AppBarPage extends State<AppBarPage> {
               tabs: [
                 Tab(text: 'Members'),
                 Tab(text: 'Map'),
-                // Tab(text: 'Messages'),
+                Tab(text: 'Messages'),
               ],
             ),
             title: Text(widget.appStatus.flock.title),

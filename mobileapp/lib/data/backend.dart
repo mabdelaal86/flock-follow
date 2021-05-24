@@ -7,7 +7,7 @@ Future<String> httpGet(String url) async {
   if (response.statusCode == 200) {
     return response.body;
   } else {
-    throw Exception('Failed to load data');
+    throw Exception('Failed to GET data');
   }
 }
 
@@ -19,7 +19,7 @@ Future<String> httpPost(String url, data) async {
   if ([200, 201, 204].contains(response.statusCode)) {
     return response.body;
   } else {
-    throw Exception('Failed to load data');
+    throw Exception('Failed to POST data');
   }
 }
 
@@ -31,6 +31,15 @@ Future<String> httpPut(String url, data) async {
   if (response.statusCode == 200) {
     return response.body;
   } else {
-    throw Exception('Failed to load data');
+    throw Exception('Failed to PUT data');
+  }
+}
+
+Future<String> httpDelete(String url) async {
+  final response = await http.delete(BaseUrl + url);
+  if ([200, 204].contains(response.statusCode)) {
+    return response.body;
+  } else {
+    throw Exception('Failed to DELETE data');
   }
 }

@@ -3,19 +3,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'data/app_status.dart';
+import 'data/flock.dart';
+import 'data/member.dart';
 import 'members.dart';
 import 'messages.dart';
 import 'map.dart';
 
-class AppBarPage extends StatelessWidget {
+class AppBarPage extends StatefulWidget {
   final AppStatus appStatus;
 
   const AppBarPage(this.appStatus, {Key key}) : super(key: key);
 
   @override
+  _AppBarPage createState() => _AppBarPage();
+}
+
+class _AppBarPage extends State<AppBarPage> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
@@ -25,6 +31,24 @@ class AppBarPage extends StatelessWidget {
                   icon: Icon(Icons.refresh),
                   onPressed: () => Phoenix.rebirth(context)
               ),
+              PopupMenuButton<String>(
+                onSelected: (item) async {
+                  if (item == "/leave") {
+                    await leaveFlock(
+                        widget.appStatus.flock.id, widget.appStatus.user.id);
+
+                    Phoenix.rebirth(context);
+                  }
+                },
+                itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<String>>[
+                  PopupMenuItem<String>(
+                    value: "/leave",
+                    child: Text('Leave'),
+                    enabled: !widget.appStatus.isLeader,
+                  ),
+                ],
+              ),
             ],
             bottom: TabBar(
               tabs: [
@@ -33,17 +57,45 @@ class AppBarPage extends StatelessWidget {
                 Tab(text: 'Messages'),
               ],
             ),
-            title: Text('ver home new flock name'),
+            title: Text(widget.appStatus.flock.title),
           ),
           body: TabBarView(
             children: [
-              Members(),
+              MembersPage(widget.appStatus),
               Map(),
               Messages(),
             ],
           ),
+          floatingActionButton: !widget.appStatus.isLeader ? null : FloatingActionButton(
+            onPressed: () async => await advanceFlockStatus(),
+            child: Icon(floatingIcon()),
+            backgroundColor: Colors.green,
+          ),
         ),
-      ),
     );
+  }
+
+  IconData floatingIcon() {
+    if (widget.appStatus.flock.status == "C")
+      return Icons.directions_run;
+    if (widget.appStatus.flock.status == "S")
+      return Icons.close;
+    return Icons.error_outline;
+  }
+
+  Future advanceFlockStatus() async {
+    if (widget.appStatus.flock.status == "C")
+      await changeFlockStatus("S");
+    else
+      await changeFlockStatus("F");
+  }
+
+  Future changeFlockStatus(String status) async {
+    setState(() {
+      widget.appStatus.flock.status = status;
+    });
+    await updateFlock(widget.appStatus.flock);
+    if (widget.appStatus.flock.status == "F")
+      Phoenix.rebirth(context);
   }
 }

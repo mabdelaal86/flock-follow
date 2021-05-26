@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
+import 'data/app_status.dart';
+import 'data/member.dart';
+import 'data/user.dart';
+import 'utilities.dart';
 
 final ThemeData iOSTheme = ThemeData(
   primarySwatch: Colors.red,
@@ -14,7 +18,7 @@ final ThemeData androidTheme = ThemeData(
   accentColor: Colors.green,
 );
 
-const String defaultUserName = "Abdallah Daly";
+// const String defaultUserName = name;
 
 class Messages extends StatelessWidget {
   @override
@@ -22,7 +26,7 @@ class Messages extends StatelessWidget {
     return MaterialApp(
       title: "Chat Application",
       theme:
-      defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
+          defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
       home: Chat(),
     );
   }
@@ -44,11 +48,11 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
       body: Column(children: <Widget>[
         Flexible(
             child: ListView.builder(
-              itemBuilder: (_, int index) => _messages[index],
-              itemCount: _messages.length,
-              reverse: true,
-              padding: EdgeInsets.all(6.0),
-            )),
+          itemBuilder: (_, int index) => _messages[index],
+          itemCount: _messages.length,
+          reverse: true,
+          padding: EdgeInsets.all(6.0),
+        )),
         Divider(height: 1.0),
         Container(
           child: _buildComposer(),
@@ -75,28 +79,28 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                   },
                   onSubmitted: _submitMsg,
                   decoration:
-                  InputDecoration.collapsed(hintText: "Type a message"),
+                      InputDecoration.collapsed(hintText: "Type a message"),
                 ),
               ),
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 3.0),
                   child: Theme.of(context).platform == TargetPlatform.iOS
                       ? CupertinoButton(
-                      child: Text("Submit"),
-                      onPressed: _isWriting
-                          ? () => _submitMsg(_textController.text)
-                          : null)
+                          child: Text("Submit"),
+                          onPressed: _isWriting
+                              ? () => _submitMsg(_textController.text)
+                              : null)
                       : IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: _isWriting
-                        ? () => _submitMsg(_textController.text)
-                        : null,
-                  )),
+                          icon: Icon(Icons.send),
+                          onPressed: _isWriting
+                              ? () => _submitMsg(_textController.text)
+                              : null,
+                        )),
             ],
           ),
           decoration: Theme.of(context).platform == TargetPlatform.iOS
               ? BoxDecoration(
-              border: Border(top: BorderSide(color: Colors.brown)))
+                  border: Border(top: BorderSide(color: Colors.brown)))
               : null),
     );
   }
@@ -130,37 +134,46 @@ class Msg extends StatelessWidget {
   Msg({this.txt, this.animationController});
   final String txt;
   final AnimationController animationController;
+  List<User> _userMessagesAccsass = <User>[];
 
   @override
   Widget build(BuildContext ctx) {
-    return SizeTransition(
-      sizeFactor:
-      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
-      axisAlignment: 0.0,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(right: 18.0),
-              child: CircleAvatar(child: Text(defaultUserName[0])),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(defaultUserName, style: Theme.of(ctx).textTheme.subhead),
-                  Container(
-                    margin: const EdgeInsets.only(top: 6.0),
-                    child: Text(txt),
+    return ListView(
+      children: _userMessagesAccsass
+          .map((userMessagesAccsass) => SizeTransition(
+                sizeFactor: CurvedAnimation(
+                    parent: animationController, curve: Curves.easeOut),
+                axisAlignment: 0.0,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(right: 18.0),
+                        child: CircleAvatar(
+                            child: Text(userMessagesAccsass.name[0])),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(userMessagesAccsass.name,
+                                style: Theme.of(ctx).textTheme.subhead),
+                            Container(
+                              margin: const EdgeInsets.only(top: 6.0),
+                              child: Text(txt),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+                ),
+              ))
+          .toList(),
     );
   }
 }
+
+      // children: _userMessagesAccsass.map((userMessagesAccsass) =>

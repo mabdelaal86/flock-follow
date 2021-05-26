@@ -175,5 +175,3 @@ class Msg extends StatelessWidget {
     );
   }
 }
-
-      // children: _userMessagesAccsass.map((userMessagesAccsass) =>

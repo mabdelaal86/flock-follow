@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flock_follow/data/user.dart';
+
 import 'backend.dart';
 
 class Flock {
@@ -16,8 +18,8 @@ class Flock {
   DateTime finishedAt;
   int leaderId;
 
-  Flock.fromJson(Map<String, dynamic> json):
-        id = json['id'] as int,
+  Flock.fromJson(Map<String, dynamic> json)
+      : id = json['id'] as int,
         title = json['title'] as String,
         description = json['description'] as String,
         status = json['status'] as String,
@@ -32,10 +34,14 @@ class Flock {
 
   String get flockStatus {
     switch (status) {
-      case 'C': return "Created";
-      case 'S': return "Started";
-      case 'F': return "Finished";
-      default: return "Unknown";
+      case 'C':
+        return "Created";
+      case 'S':
+        return "Started";
+      case 'F':
+        return "Finished";
+      default:
+        return "Unknown";
     }
   }
 }
@@ -69,13 +75,13 @@ List<Flock> parseFlocks(String responseText) {
 }
 
 Future<Flock> createFlock(
-    String title,
-    String destination,
-    String password,
-    double latitude,
-    double longitude,
-    int leaderId,
-    ) async {
+  String title,
+  String destination,
+  String password,
+  double latitude,
+  double longitude,
+  int leaderId,
+) async {
   final String json = '{'
       '"title": "$title", '
       '"destination": "$destination", '

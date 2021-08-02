@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-const BaseUrl = "http://10.0.2.2:8000/api/v1";
+const BaseUrl = "https://flock-follow.live/api/v1";
 
 Future<String> httpGet(String url) async {
   final response = await http.get(BaseUrl + url);

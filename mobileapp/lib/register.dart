@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'data/user_location.dart';
 import 'data/user.dart';
@@ -70,6 +71,7 @@ class _RegisterPage extends State<RegisterPage> {
 
   saveData() async {
     if (_formKey.currentState.validate()) {
+      context.loaderOverlay.show();
       _formKey.currentState.save();
 
       try {

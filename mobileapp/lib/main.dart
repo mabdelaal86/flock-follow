@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'data/app_status.dart';
 import 'map.dart';
@@ -15,9 +16,11 @@ void main() => runApp(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flock Follow',
-      home: MainPage(),
+    return GlobalLoaderOverlay(
+      child: MaterialApp(
+        title: 'Welcome to Flock Follow',
+        home: MainPage(),
+      ),
     );
   }
 }

@@ -38,6 +38,7 @@ dependencies:
 
   flutter_phoenix: ^1.0.0
   url_launcher: ^6.0.4
+  loader_overlay: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'data/flock.dart';
 import 'data/member.dart';
@@ -86,13 +87,16 @@ class _HomePage extends State<HomePage> {
 
   loadFlocks(BuildContext context) async {
     try {
+      context.loaderOverlay.show();
       final l = await determinePosition();
       print("* Location: {$l}");
       final flocks = await findFlocks(l.latitude, l.longitude);
       print("* Flocks: ${flocks.length}");
       setState(() => _flocks = flocks);
+      context.loaderOverlay.hide();
     }
     catch (ex) {
+      context.loaderOverlay.hide();
       await showAlert(context, ex, "Loading failed");
     }
   }

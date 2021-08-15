@@ -88,7 +88,7 @@ class _HomePage extends State<HomePage> {
   loadFlocks(BuildContext context) async {
     try {
       context.loaderOverlay.show();
-      final l = await determinePosition();
+      final l = await getLocation();
       print("* Location: {$l}");
       final flocks = await findFlocks(l.latitude, l.longitude);
       print("* Flocks: ${flocks.length}");

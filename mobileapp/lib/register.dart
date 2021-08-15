@@ -75,7 +75,7 @@ class _RegisterPage extends State<RegisterPage> {
       _formKey.currentState.save();
 
       try {
-        final l = await determinePosition();
+        final l = await getLocation();
         print("* Location: {$l}");
         final User user = await createUser(_userName, _userPhone, l.latitude, l.longitude);
         await setUserLocalId(user.id);

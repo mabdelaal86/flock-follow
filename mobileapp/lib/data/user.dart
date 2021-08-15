@@ -43,7 +43,7 @@ Future setUserLocalId(int value) async {
 }
 
 Future<User> readUser(id) async {
-  final String data = await httpGet("/users/$id/");
+  final String data = await httpGet("users/$id/");
   return parseUser(data);
 }
 
@@ -75,7 +75,7 @@ Future<User> createUser(
       '"phone": "$phone", '
       '"latitude": "$latitude", '
       '"longitude": "$longitude"}';
-  final String res = await httpPost('/users/', json);
+  final String res = await httpPost('users/', json);
   return parseUser(res);
 }
 
@@ -87,5 +87,5 @@ Future updateUser(User user) async {
       '"phone": "${user.phone}", '
       '"latitude": "${user.latitude}", '
       '"longitude": "${user.longitude}"}';
-  await httpPut('/users/${user.id}/', json);
+  await httpPut('users/${user.id}/', json);
 }

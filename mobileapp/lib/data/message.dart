@@ -17,7 +17,7 @@ class Message {
 }
 
 Future<Message> readMessage(flockId, userId) async {
-  final String data = await httpGet("/flocks/$flockId/members/$userId/");
+  final String data = await httpGet("flocks/$flockId/members/$userId/");
   return parseMessage(data);
 }
 
@@ -36,6 +36,6 @@ Future<Message> createMessage(
   final DateTime = '{"date_time": "$dateTime"}';
   final int = '{"user_id": "$userId", "flock_id": "$flockId"}';
   final String res =
-      await httpPost('/flocks/$flockId/members/$userId/', json);
+      await httpPost('flocks/$flockId/members/$userId/', json);
   return parseMessage(res);
 }

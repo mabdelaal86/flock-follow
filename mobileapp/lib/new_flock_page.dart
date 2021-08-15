@@ -82,7 +82,7 @@ class _NewFlockPage extends State<NewFlockPage> {
 
       try {
         final userId = await getUserLocalId();
-        final l = await determinePosition();
+        final l = await getLocation();
         await createFlock(
             _flockTitle, _flockDestination, _flockPassword,
             l.latitude, l.longitude, userId);

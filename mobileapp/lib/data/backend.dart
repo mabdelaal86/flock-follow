@@ -1,9 +1,11 @@
 import 'package:http/http.dart' as http;
 
-const BaseUrl = "https://flock-follow.live/api/v1";
+Uri buildUrl(String subUrl, [Map<String, String> queryParams]) {
+  return Uri.https("flock-follow.live", "/api/v1/$subUrl", queryParams);
+}
 
-Future<String> httpGet(String url) async {
-  final response = await http.get(BaseUrl + url);
+Future<String> httpGet(String subUrl, [Map<String, String> queryParams]) async {
+  final response = await http.get(buildUrl(subUrl, queryParams));
   if (response.statusCode == 200) {
     return response.body;
   } else {
@@ -11,8 +13,8 @@ Future<String> httpGet(String url) async {
   }
 }
 
-Future<String> httpPost(String url, data) async {
-  final response = await http.post(BaseUrl + url,
+Future<String> httpPost(String subUrl, data) async {
+  final response = await http.post(buildUrl(subUrl),
     headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8' },
     body: data,
   );
@@ -23,8 +25,8 @@ Future<String> httpPost(String url, data) async {
   }
 }
 
-Future<String> httpPut(String url, data) async {
-  final response = await http.put(BaseUrl + url,
+Future<String> httpPut(String subUrl, data) async {
+  final response = await http.put(buildUrl(subUrl),
     headers: <String, String>{ 'Content-Type': 'application/json; charset=UTF-8' },
     body: data,
   );
@@ -35,8 +37,8 @@ Future<String> httpPut(String url, data) async {
   }
 }
 
-Future<String> httpDelete(String url) async {
-  final response = await http.delete(BaseUrl + url);
+Future<String> httpDelete(String subUrl) async {
+  final response = await http.delete(buildUrl(subUrl));
   if ([200, 204].contains(response.statusCode)) {
     return response.body;
   } else {

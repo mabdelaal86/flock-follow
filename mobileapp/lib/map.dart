@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'data/app_status.dart';
@@ -24,19 +24,13 @@ class MapPage extends StatefulWidget {
 
 class _MapPage extends State<MapPage> {
   List<User> members = [];
-  StreamSubscription<Position> positionStream;
+  Location _location = Location();
   GoogleMapController _controller;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => subscribeToPosition());
-  }
-
-  @override
-  Future dispose() async {
-    super.dispose();
-    await positionStream.cancel();
+    WidgetsBinding.instance.addPostFrameCallback((_) => subscribeToUserLocation());
   }
 
   @override
@@ -110,34 +104,33 @@ class _MapPage extends State<MapPage> {
       Phoenix.rebirth(context);
   }
 
-  void subscribeToPosition() {
-    positionStream = Geolocator.getPositionStream(
-        desiredAccuracy: LocationAccuracy.best).listen(updateLocation);
+  void subscribeToUserLocation() {
+    _location.onLocationChanged.listen(updateLocation);
   }
 
-  Future updateLocation(Position position) async {
-    if (position == null) {
+  Future updateLocation(LocationData currentLocation) async {
+    if (currentLocation == null) {
       print("Unknown position");
       return;
     }
 
-    print('Position: ${position.latitude}, ${position.longitude}');
+    print('Position: ${currentLocation.latitude}, ${currentLocation.longitude}');
 
-    await updateUserLocation(position);
-    await updateFlockLocation(position);
+    await updateUserLocation(currentLocation);
+    await updateFlockLocation(currentLocation);
     await loadMemberLocations();
   }
 
-  Future updateUserLocation(Position position) async {
-    widget.appStatus.user.latitude = position.latitude;
-    widget.appStatus.user.longitude = position.longitude;
+  Future updateUserLocation(LocationData currentLocation) async {
+    widget.appStatus.user.latitude = currentLocation.latitude;
+    widget.appStatus.user.longitude = currentLocation.longitude;
     await updateUser(widget.appStatus.user);
   }
 
-  Future updateFlockLocation(Position position) async {
+  Future updateFlockLocation(LocationData currentLocation) async {
     if (widget.appStatus.isLeader) {
-      widget.appStatus.flock.latitude = position.latitude;
-      widget.appStatus.flock.longitude = position.longitude;
+      widget.appStatus.flock.latitude = currentLocation.latitude;
+      widget.appStatus.flock.longitude = currentLocation.longitude;
       await updateFlock(widget.appStatus.flock);
     }
   }

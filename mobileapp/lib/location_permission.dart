@@ -34,8 +34,7 @@ class LocationPermission extends StatelessWidget {
 
   Future askForPermission(BuildContext context) async {
     try {
-      await requestLocationPermission();
-
+      await getLocation();
       Phoenix.rebirth(context);
     }
     catch (ex) {

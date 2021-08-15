@@ -41,12 +41,14 @@ class Flock {
 }
 
 Future<Flock> readFlock(id) async {
-  final String data = await httpGet("/flocks/$id/");
+  final String data = await httpGet("flocks/$id/");
   return parseFlock(data);
 }
 
 Future<List<Flock>> findFlocks(double lat, double lng) async {
-  final String data = await httpGet("/flocks/?lat=$lat&lng=$lng");
+  final String data = await httpGet("flocks/", {
+    "lat": lat.toString(), "lng": lng.toString()
+  });
   return parseFlocks(data);
 }
 
@@ -83,7 +85,7 @@ Future<Flock> createFlock(
       '"latitude": "$latitude", '
       '"longitude": "$longitude", '
       '"leader": $leaderId}';
-  final String res = await httpPost('/flocks/', json);
+  final String res = await httpPost('flocks/', json);
   return parseFlock(res);
 }
 
@@ -97,5 +99,5 @@ Future updateFlock(Flock flock) async {
       '"longitude": "${flock.longitude}", '
       '"status": "${flock.status}", '
       '"leader": ${flock.leaderId}}';
-  await httpPut('/flocks/${flock.id}/', json);
+  await httpPut('flocks/${flock.id}/', json);
 }

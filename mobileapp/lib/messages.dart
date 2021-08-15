@@ -150,7 +150,7 @@ class Msg extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(defaultUserName, style: Theme.of(ctx).textTheme.subhead),
+                  Text(defaultUserName, style: Theme.of(ctx).textTheme.subtitle1),
                   Container(
                     margin: const EdgeInsets.only(top: 6.0),
                     child: Text(txt),

@@ -1,12 +1,15 @@
 from django.db.models import F, Q
 from django.db.models.functions import math
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User, Flock
 from .serializers import UserSerializer, FlockSerializer, MessageSerializer
+from django.http import HttpResponse
 
+def privacy_policyview(request):
+      return render(request,"privacy_policy.html")
 
 class UserList(APIView):
     def post(self, request):

@@ -26,6 +26,7 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     
     #Flock APIs
+    path('privacy-policy/',views.privacy_policyview),
     path('api/v1/users/', views.UserList.as_view()),
     path('api/v1/users/<int:pk>/', views.UserDetail.as_view()),
     path('api/v1/flocks/', views.FlockList.as_view()),

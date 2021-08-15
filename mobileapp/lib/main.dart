@@ -8,6 +8,7 @@ import 'map.dart';
 import 'utilities.dart';
 import 'home.dart';
 import 'register.dart';
+import 'location_permission.dart';
 
 void main() => runApp(
     Phoenix(child: MyApp())
@@ -38,6 +39,8 @@ class _MainPage extends State<MainPage> {
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return buildMessage("Loading...");
+        if (!snapshot.data.locationAllowed)
+          return LocationPermission();
         if (!snapshot.data.registered)
           return RegisterPage();
         if (!snapshot.data.joinedFlock)

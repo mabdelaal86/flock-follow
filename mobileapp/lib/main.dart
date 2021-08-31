@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlobalLoaderOverlay(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Welcome to Flock Follow',
         home: MainPage(),
       ),

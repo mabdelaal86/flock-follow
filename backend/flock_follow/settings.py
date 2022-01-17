@@ -28,11 +28,11 @@ SECRET_KEY = '#2a1bt)xhni9etp$-nx#x9@-=t+$2v#5el7%9zxc4==3$g*-wq'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'flock-follow.live',
-#     '0.0.0.0',
-#     'localhost', '127.0.0.1',  # localhost
-#     '10.0.2.2',  # emulator
-#     '192.168.0.1',
+    #'flock-follow.live',
+    '0.0.0.0',
+    'localhost', '127.0.0.1',  # localhost
+    '10.0.2.2',  # emulator
+    '192.168.0.1',
 ]
 
 

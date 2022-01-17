@@ -26,12 +26,12 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     
     #Flock APIs
-    path('privacy-policy/',views.privacy_policyview),
-    path('api/v1/users/', views.UserList.as_view()),
-    path('api/v1/users/<int:pk>/', views.UserDetail.as_view()),
-    path('api/v1/flocks/', views.FlockList.as_view()),
-    path('api/v1/flocks/<int:pk>/', views.FlockDetail.as_view()),
-    path('api/v1/flocks/<int:pk>/members/', views.MemberList.as_view()),
-    path('api/v1/flocks/<int:pk>/members/<int:member_id>/', views.MemberDetail.as_view()),
-    path('api/v1/flocks/<int:pk>/messages/', views.MessageList.as_view()),
+    path('privacy-policy/', views.privacy_policyview, name='privacy_policyview'),
+    path('api/v1/users/', views.UserList.as_view(), name='UserList'),
+    path('api/v1/users/<int:pk>/', views.UserDetail.as_view(), name='UserDetail'),
+    path('api/v1/flocks/', views.FlockList.as_view(), name='FlockList'),
+    path('api/v1/flocks/<int:pk>/', views.FlockDetail.as_view(), name='FlockDetail'),
+    path('api/v1/flocks/<int:pk>/members/', views.MemberList.as_view(), name='MemberList'),
+    path('api/v1/flocks/<int:pk>/members/<int:member_id>/', views.MemberDetail.as_view(), name='MemberDetail'),
+    path('api/v1/flocks/<int:pk>/messages/', views.MessageList.as_view(), name='MessageList'),
 ]
